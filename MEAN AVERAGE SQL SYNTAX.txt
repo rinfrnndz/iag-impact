@@ -1,0 +1,23 @@
+//Getting the MEAN of each Question
+SELECT q1,CAST((SUM(q1)/COUNT(q1))*100 AS DECIMAL(10,2)) AS MEAN1 
+FROM evaluation eval WHERE acty_id='18';
+
+===============================================
+
+//Getting of the Average/MEAN of each Question
+
+SELECT q1,AVG(q1) AS MEAN
+FROM evaluation
+WHERE acty_id='18';
+
+===============================================
+
+//Getting of the Percentages of each Question the other way round
+SELECT q1,
+          ROUND(AVG(CASE q1 WHEN '1' THEN 1 END), 2) AS SD,
+          ROUND(AVG(CASE q1 WHEN '2' THEN 1 END), 2) AS D,
+          ROUND(AVG(CASE q1 WHEN '3' THEN 1 END), 2) AS U,
+          ROUND(AVG(CASE q1 WHEN '4' THEN 1 END), 2) AS A,
+          ROUND(AVG(CASE q1 WHEN '5' THEN 1 END), 2) AS SA
+                        
+FROM `evaluation` WHERE acty_id='18';

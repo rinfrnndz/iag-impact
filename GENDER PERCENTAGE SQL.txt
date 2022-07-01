@@ -1,0 +1,29 @@
+SELECT gender,CAST((SUM(q1)/COUNT(q1))*100 AS DECIMAL(10,2)) AS MEAN1 
+FROM evaluation eval WHERE acty_id='18';
+
+select gender,100*sum(case when gender = 'Male' then 1 else 0 end)/count(*) male_percent,
+         100*sum(case when gender = 'Female' then 1 else 0 end)/count(*) fem_percent
+from evaluation
+group by id
+
+select gender,count(CASE WHEN gender='Male' THEN 1 END/count(gender)*100) as 'male_percentage',
+	count(CASE WHEN gender='Female' THEN 1 END/count(gender)*100) as 'female_percentage'
+from evaluation
+where id='20'
+group by id
+
+select `first_name`,`last_name`,gender,100*sum(CASE WHEN gender='Male' THEN 1 END)/count(`id`) as 'male_percentage',
+	100*sum(CASE WHEN gender='Female' THEN 1 END)/count(`id`) as 'female_percentage'
+from evaluation
+where acty_id='20';
+
+SELECT `age_range`,CASE 
+WHEN `age_range` BETWEEN 15 and 25 THEN '15-25' 
+WHEN `age_range` BETWEEN 26 and 35 THEN '26-35'
+WHEN `age_range` BETWEEN 36 and 45 THEN '36-45'
+WHEN `age_range` BETWEEN 46 and 55 THEN '46-55'
+WHEN `age_range` BETWEEN 56 and 65 THEN '56-65' 
+WHEN `age_range` >= 65 THEN 'Over 65' END AS Age_Range,
+count(`age_range`) as COUNTs
+FROM evaluation WHERE acty_id='20'
+GROUP BY age_range;

@@ -1,0 +1,33 @@
+SELECT
+    CASE
+                            WHEN agerange BETWEEN 15 and 25 THEN '15-25'
+                            WHEN agerange BETWEEN 26 and 35 THEN '26-35'
+                            WHEN agerange BETWEEN 36 and 45 THEN '36-45'
+                            WHEN agerange BETWEEN 46 and 55 THEN '46-55'
+                            WHEN agerange BETWEEN 56 and 65 THEN '56-65'
+                            WHEN agerange >= 66 THEN 'Over 65'
+                            END as age_range, COUNT(*) AS count
+    FROM `participants`
+    GROUP BY agerange
+    ORDER BY agerange;
+
+=======================================================
+SELECT 
+	SUM(IF(agerange BETWEEN 15 and 25,1,0)) as '15-25',
+          SUM(IF(agerange BETWEEN 26 and 35,1,0)) as '26-35',
+          SUM(IF(agerange BETWEEN 36 and 45,1,0)) as '36-45',
+          SUM(IF(agerange BETWEEN 46 and 55,1,0)) as '46-55',
+          SUM(IF(agerange BETWEEN 56 and 65,1,0)) as '56-65',
+          SUM(IF(agerange >=66, 1, 0)) as 'Over65'
+
+=======================================================
+
+SELECT 
+CASE WHEN `agerange` BETWEEN 15 and 25 THEN '15-25' WHEN `agerange` 
+BETWEEN 26 and 35 THEN '26-35' WHEN `agerange` 
+BETWEEN 36 and 45 THEN '36-45' WHEN `agerange` 
+BETWEEN 46 and 55 THEN '46-55' WHEN `agerange` 
+BETWEEN 56 and 65 THEN '56-65' WHEN `agerange` 
+THEN 'Over 65' END as RANGE_AGE, count(*) as COUNT FROM `participants` WHERE `act_id`='17'
+GROUP BY RANGE_AGE;
+	

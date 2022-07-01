@@ -1,0 +1,32 @@
+foreach($dbh->query('SELECT country,COUNT(*)
+FROM author
+GROUP BY country') as $row)
+
+$ethnicity_row = mysqli_fetch_array($sqlforethnicity)
+
+ <?php //For Ethnicity
+        //$ethnicity_count = "SELECT ethnicity,COUNT(*) as ethniccount FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' GROUP BY acty.id ";
+        //$sqlforethnicity = mysqli_query($connect, $ethnicity_count);
+        foreach($connect->query("SELECT ethnicity,COUNT(*) FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' GROUP BY acty.id") as $ethnicity_row) {
+      ?>
+      <label for="">Ethnicity:</label>
+      <label for=""><?php echo $ethnicity_row['ethnicity'];?></label>
+      <label for=""><?php echo $ethnicity_row['COUNT(*)'];?></label><br>
+      <?php }?>
+
+
+ <?php //For Ethnicity
+        $ethnicity_count = "SELECT ethnicity,COUNT(*) FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' GROUP BY acty.id ";
+        $sqlforethnicity = mysqli_query($connect, $ethnicity_count);
+        while($ethnicity_row = mysqli_fetch_array($sqlforethnicity)) {
+        //foreach($connect->query("SELECT ethnicity,COUNT(*) FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' GROUP BY acty.id") as $ethnicity_row) {
+      ?>
+      <label for="">Ethnicity:</label>
+      <label for=""><?php echo $ethnicity_row['ethnicity'];?></label>
+      <label for=""><?php echo $ethnicity_row['COUNT(*)'];?></label><br>
+      <?php }?>
+
+SELECT `ethnicity`,COUNT(*) 
+FROM `participants`
+WHERE act_id='3'
+GROUP BY ethnicity,act_id;
