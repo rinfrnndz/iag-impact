@@ -276,7 +276,7 @@ a {
             <?php
                 $no++;
               }
-              $number_of_page = ceil($number_of_results/$result_per_page);
+              /*$number_of_page = ceil($number_of_results/$result_per_page);
               if (!isset($_GET['page'])) {
                 $page = 1;
               } else {
@@ -286,7 +286,7 @@ a {
               //starting_limit_number = (page_number-1)*results_per_page;
               for ($page=1;$page<=$number_of_page;$page++){
                 echo '<a style="padding:10px;" href="display.php?id=' .$actvtyID. '?page=' .$page. ' ">'. $page .'</a>';
-              }
+              }*/
             ?>
           </tbody>
       </table>
