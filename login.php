@@ -153,13 +153,13 @@ a {
             </div>
             <div class="collapse navbar-collapse" id="myNavbar" >
             <ul class="nav navbar-nav" >
-                <li><a href="index.php">Home</a></li>
+                <li><a href="index">Home</a></li>
                 
-                <li><a href="register.php">Registration Form</a></li>
-                <li><a href="evaluation-form.php">Evaluation Form</a></li>
+                <li><a href="register">Registration Form</a></li>
+                <li><a href="evaluation-form">Evaluation Form</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li class="active"><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
             </div>
         </div>
@@ -177,7 +177,7 @@ a {
         if($login->num_rows > 0) {
           $account = mysqli_fetch_assoc($login);
           $_SESSION['username'] = $account['project_code'];
-          header("location: account.php");
+          header("location: account");
         } else {
           echo "<div class='alert alert-warning' style='width:100%; margin-left:auto; margin-right:auto;'><strong>Warning!</strong>&nbsp;Username and Password doesn't exist!</div>";
         }

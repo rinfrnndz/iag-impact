@@ -169,7 +169,7 @@ p {
             </div>
             <div class="collapse navbar-collapse" id="myNavbar" >
               <ul class="nav navbar-nav" >
-                  <li><a href="index.">Home</a></li>
+                  <li><a href="index">Home</a></li>
                   
                   <li class="active"><a href="register">Registration Form</a></li>
                   <li><a href="evaluation-form">Evaluation Form</a></li>

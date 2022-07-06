@@ -1,0 +1,11 @@
+Username	||	password
+Enpold2		||	1001*iagenpold2
+WFD		||	1002*iagwfd
+KAS		||	1003*iagkas
+MILAB		||	1004*iagmilab
+IDEA		||	1005*iagidea
+NDI		||	1006*iagndi
+FreedomHouse	||	1007*iagfh
+DFAT		||	1008*iagdfat
+GCERF		||	1009*iaggcerf
+IP Champions	||	1010*iagipc
