@@ -204,13 +204,13 @@ th {
             </div>
             <div class="collapse navbar-collapse" id="myNavbar" >
             <ul class="nav navbar-nav" >
-                <li><a href="index.php">Home</a></li>
+                <li><a href="index">Home</a></li>
                 
-                <li><a href="register.php">Registration Form</a></li>
-                <li class="active"><a href="evaluation-form.php">Evaluation Form</a></li>
+                <li><a href="register">Registration Form</a></li>
+                <li class="active"><a href="evaluation-form">Evaluation Form</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
             </div>
         </div>
@@ -224,7 +224,7 @@ th {
       $actvtytitle =  $_POST['activity']; //mysqli_real_escape_string($connect,
         $firstname = $_POST['fname']; //mysqli_real_escape_string($connect,);
         $lastname = $_POST['lname']; //mysqli_real_escape_string($connect,);
-        $dob = $_POST['birthdate']; //mysqli_real_escape_string($connect,);
+        //$dob = $_POST['birthdate']; //mysqli_real_escape_string($connect,);
         $agerange = $_POST['age_range']; //mysqli_real_escape_string($connect,);
         $sgender = $_POST['sgender']; //mysqli_real_escape_string($connect,);
         $ethncty = $_POST['ethnic']; //mysqli_real_escape_string($connect,);
@@ -249,8 +249,8 @@ th {
           /*$insertforeval = "INSERT INTO evaluation (`acty_id`, `first_name`, `last_name`, `birthday`, `age_range`, `gender`, `ethnicity`, `ct_municipality`, `provnce`, `q1`, `q2`, `q3`, `q4`, `q5`, `q6`, `q7`, `q8`, `q9`, `q10`, `q11`, `q12`, `q13`, `q14`, `q15`) 
           VALUES ('$actvtytitle','$firstname','$lastname','$dob','$agerange','$sgender','$ethncty','$ctm','$province','$ques1','$ques2','$ques3','$ques4','$ques5','$ques6','$ques7','$ques8','$ques9','$ques10','$ques11','$ques12','$ques13','$ques14','$ques15')";*/
           
-        $insertforeval = 'INSERT INTO `evaluation` (`acty_id`, `first_name`, `last_name`, `birthday`, `age_range`, `gender`, `ethnicity`, `ct_municipality`, `provnce`, `q1`, `q2`, `q3`, `q4`, `q5`, `q6`, `q7`, `q8`, `q9`, `q10`, `q11`, `q12`, `q13`, `q14`, `q15`) 
-          VALUES ("'.$actvtytitle.'","'.$firstname.'","'.$lastname.'","'.$dob.'","'.$agerange.'","'.$sgender.'","'.$ethncty.'","'.$ctm.'","'.$province.'","'.$ques1.'","'.$ques2.'","'.$ques3.'","'.$ques4.'","'.$ques5.'","'.$ques6.'","'.$ques7.'","'.$ques8.'","'.$ques9.'","'.$ques10.'","'.$ques11.'","'.$ques12.'","'.$ques13.'","'.$ques14.'","'.$ques15.'")';
+        $insertforeval = 'INSERT INTO `evaluation` (`acty_id`, `first_name`, `last_name`, `age_range`, `gender`, `ethnicity`, `ct_municipality`, `provnce`, `q1`, `q2`, `q3`, `q4`, `q5`, `q6`, `q7`, `q8`, `q9`, `q10`, `q11`, `q12`, `q13`, `q14`, `q15`) 
+          VALUES ("'.$actvtytitle.'","'.$firstname.'","'.$lastname.'","'.$agerange.'","'.$sgender.'","'.$ethncty.'","'.$ctm.'","'.$province.'","'.$ques1.'","'.$ques2.'","'.$ques3.'","'.$ques4.'","'.$ques5.'","'.$ques6.'","'.$ques7.'","'.$ques8.'","'.$ques9.'","'.$ques10.'","'.$ques11.'","'.$ques12.'","'.$ques13.'","'.$ques14.'","'.$ques15.'")';
         $qryforeval = mysqli_query($connect, $insertforeval);
         //echo "$qryforeval";
         if($qryforeval) {
@@ -286,8 +286,8 @@ th {
     <label for="lname"><b>Last Name</b></label>
     <input type="text" placeholder="Enter your Last Name" name="lname" id="lname" required>
 
-    <label for="dob"><b>Date of Birth</b></label>
-    <input type="date" placeholder="Enter Activity Date" name="birthdate" id="birthdate" >
+    <!--<label for="dob"><b>Date of Birth</b></label>
+    <input type="date" placeholder="Enter Activity Date" name="birthdate" id="birthdate" >-->
       
     <br>
     <label for="age"><b>Age Range</b></label>
@@ -437,7 +437,7 @@ th {
     </table>
     <hr>
   <label style="text-align:left;font-size:15px;color:orange;">Overall rating of the program, logistics, secretariat, resource person</label><br/><br/>
-    <p style="text-align:left;font-weight: normal;">11. How would you rate the event overall?</p><br/>
+    <p style="text-align:left;font-weight: normal;">11. How would you rate the activity overall?</p><br/>
         <div class="rating">
           <input id="star1" name="ques11" type="radio" value="Very Good" class="radio-btn hide" /><label for="star1">☆</label>
           <input id="star2" name="ques11" type="radio" value="Good " class="radio-btn hide" /><label for="star2">☆</label>
@@ -448,11 +448,11 @@ th {
         </div><br>
     <hr>
     <label style="text-align:left;font-size:15px;color:orange;">Other comments (Please type your answers below.)</label><br/><br/>
-        <p style="text-align:left;font-weight: normal;">12. Which topics or aspects of the seminar/activity did you find most interesting or useful?</p>
+        <p style="text-align:left;font-weight: normal;">12. Which topics or aspects of the activity did you find most interesting or useful?</p>
         <input type="text"  name="ques12" id="ques12" />
-        <p style="text-align:left;font-weight: normal;">13. I intend to apply the knowledge gained in this training by doing the following:</p>
+        <p style="text-align:left;font-weight: normal;">13. I intend to apply the knowledge gained in this activity by doing the following:</p>
         <input type="text"  name="ques13" id="ques13" />
-        <p style="text-align:left;font-weight: normal;">14. To be able to apply the knowledge gained from this training effectively, I would also need the following:</p>
+        <p style="text-align:left;font-weight: normal;">14. To be able to apply the knowledge gained from this activity effectively, I would also need the following:</p>
         <input type="text"  name="ques14" id="ques14" />
         <br/>
 
@@ -465,7 +465,7 @@ th {
             <th>Very familiar</th>
         </tr>
         <tr>
-            <td style="width:55%;">15. Rate your level of familiarity with Institute for Autonomy and Governance (IAG) work</td>
+            <td style="width:55%;">15. Rate your level of familiarity with Institute for Autonomy and Governance (IAG) and its work</td>
             <th><input type="radio"  name="ques15" value="Not familiar at all"></th>
             <th><input type="radio"  name="ques15" value="Slightly familiar"></th>
             <th><input type="radio"  name="ques15" value="Moderately familiar"></th>

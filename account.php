@@ -100,7 +100,7 @@ a {
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default" >
+<nav class="navbar navbar-default" style="font-family: calibri; letter-spacing: 1.1px; font-weight: bold;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
@@ -111,30 +111,30 @@ a {
             </div>
             <div class="collapse navbar-collapse" id="myNavbar" >
             <ul class="nav navbar-nav" >
-                <li class="active"><a href="account.php">IAG</a></li>
+                <li class="active"><a href="account">IAG</a></li>
                 
-                <li><a href="activity.php">Add Activity</a></li>
-                <li><a href="evaluation-report.php">Evaluation Report</a></li>
+                <li><a href="activity">Add Activity</a></li>
+                <li><a href="evaluation-report">Evaluation Report</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             </div>
         </div>
     </nav>
 
   <div class="container">
-    <?php echo "<h1><center>" .$_SESSION['username']. " Report</h1>"; ?></h1>
+    <?php echo "<h2><center>" .$_SESSION['username']. " Report</h1>"; ?></h2>
     <hr>
-    <h3>Lists of Activities Conducted</h3><br/>
+    <h4>Lists of Activities Conducted</h4><br/>
     <table class="table">
     <thead>
       <tr>
           <!--<th>Project Code</th>-->
-          <th>#</th>
-          <th>Activity</th>
-          <th>Date</th>
-          <th>Option</th>
+          <th style="text-align: center;">#</th>
+          <th style="text-align: center;">Activity</th>
+          <th style="text-align: center;">Date</th>
+          <th colspan="2" style="text-align: center;">Option/s</th>
       </tr>
     </thead>
         <?php 
@@ -149,7 +149,8 @@ a {
           <td><?php echo ucfirst($progrow['activity_title']);?></td>
           <td><?php echo $progrow['activity_date'];?></td>
           <td><a href="display.php?id=<?php echo $progrow['id'];?>" class="btn btn-info">View Participants</a></td>
-          <!--<td><a href="#?id=<?php echo $progrow['id']; ?>" class="btn btn-primary">See Evaluation</a></td>
+          <td><input type="checkbox" id="status" name="status" value="">&nbsp; &nbsp;Hide from the lists</td>
+          <!--<td><a href="#?id=<?php //echo $progrow['id']; ?>" class="btn btn-primary">See Evaluation</a></td>
           <td><button type="button" id="displaydetailsbtn" class="btn btn-primary">View Participants</button></td>-->
         </tr>
         <?php

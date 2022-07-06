@@ -92,12 +92,12 @@
          </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav" >
-                <li class="active"><a href="index.php">Home</a></li>
-                <li><a href="register.php">Registration Form</a></li>
-                <li><a href="evaluation-form.php">Evaluation Form</a></li>
+                <li class="active"><a href="index">Home</a></li>
+                <li><a href="register">Registration Form</a></li>
+                <li><a href="evaluation-form">Evaluation Form</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </div>

@@ -7,25 +7,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
     <title>Login</title>
+    
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
-  /*background-color: white;*/
-  background-image: url("iag.jpg");
-  height: 1000px; /* You must set a specified height */
+  background-color: white;
+  /*background-image: url("iag.jpg");*/
+  /* height: 1000px;  You must set a specified height */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
-  display: flex;
-  flex-direction: column;
+  
 }
 
 img {
@@ -41,8 +39,11 @@ img {
 .container {
   padding: 50px;
   background-color: white;
-  width: 80%;
+  width: 70%;
   position: center;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 40px 40px -7px;
+  background: rgba(255,255,255,1);
+  border-radius: 15px;
 }
 
 /* Full-width input fields */
@@ -134,6 +135,7 @@ a {
   height: 9%;
   padding: 25px;
   margin-top: auto;
+  margin-top: 35px;
   font-size: 13px;
 }
 </style>

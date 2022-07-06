@@ -70,12 +70,12 @@ hr {
     </div>
     <div class="collapse navbar-collapse" id="myNavbar" >
       <ul class="nav navbar-nav" >
-        <li><a href="account.php" style="border-radius: 50%; font-size:22px;">&laquo;</a></li>
-        <li><a href="activity.php">Add Activity</a></li>
-        <li class="active"><a href="evaluation-report.php">Evaluation Report</a></li>
+        <li><a href="account" style="border-radius: 50%; font-size:22px;">&laquo;</a></li>
+        <li><a href="activity">Add Activity</a></li>
+        <li class="active"><a href="evaluation-report">Evaluation Report</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
     </div>
   </div>
