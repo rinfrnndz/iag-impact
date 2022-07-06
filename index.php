@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    <link rel="shorcut icon" type="image/png" href="favicon-32x32.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -15,9 +15,9 @@
 <style>
     body {
         font-family: Arial, Helvetica, sans-serif;
-        /*background-color: white;*/
-        background-image: url("iag.jpg");
-        height: 1000px; /* You must set a specified height */
+        background-color: white;
+        /*background-image: url("iag.jpg");*/
+        height: auto; /* You must set a specified height */
         min-height: 100vh;
         background-position: center; /* Center the image */
         background-repeat: no-repeat; /* Do not repeat the image */
@@ -27,14 +27,15 @@
     }
 
     .container {
-        width: 80%;
+        width: 87%;
         box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
         background: rgba(255,255,255,1);
-        height: 50%;
+        height: 100%;
         border-radius: 15px;
-        padding: 25px;
-        margin: 12px auto;
+        padding: 20px;
+        margin: 15px auto;
         opacity: 1;
+        /*margin-top: 20px;*/
     }
 
     .footer {
@@ -51,6 +52,30 @@
         margin-top: auto;
         font-size: 13px;
     }
+    
+.text {
+    color: white; 
+    margin-top: 315px;
+    text-align: left; 
+    font-family: Calibri; 
+    font-size: 48px; 
+    letter-spacing: -1px; 
+    font-weight: 390; 
+    line-height: 100%;
+    padding-left: 1px;
+    padding-right: 45px;
+    padding-bottom: 25px;
+}
+@media screen and (min-width: 601px) {
+  div.text {
+    font-size: 0.9vw;
+  }
+}
+@media screen and (max-width: 600px) {
+  div.text {
+    font-size: 0.9vw;
+  }
+}
 
 </style>
     
@@ -65,7 +90,7 @@
                 <span class="icon-bar"></span>                        
             </button>
          </div>
-        <div class="collapse navbar-collapse" id="myNavbar" >
+        <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav" >
                 <li class="active"><a href="index.php">Home</a></li>
                 <li><a href="register.php">Registration Form</a></li>
@@ -82,8 +107,8 @@
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="js/main.js"></script>
 
-<div class="container" style="background-image: url('online.png'); background-position: center; background-size: auto 600px; background-repeat: no-repeat;">
-
+<div class="container" style="background: url('9.png'); background-size: cover; background-repeat: no-repeat; ">
+    <label class="text">Registration and Evaluation Website</label>
 </div>
 
 <div class="footer">

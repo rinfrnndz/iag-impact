@@ -188,11 +188,12 @@ a {
 
 </style>
 <script type="text/javasript" src="jquery-3.6.0.js"></script>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shorcut icon" type="image/png" href="favicon-32x32.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default" style="font-family: calibri; letter-spacing: 1.1px; font-weight: bold;">
@@ -231,7 +232,7 @@ a {
             <tr>
               <th scope="row" style="text-align:center;">#</th>
               <th scope="row" colspan="2" style="text-align:center;">Full Name</th>
-              <th scope="row" style="text-align:center;">Date of Birth</th>
+              <!--<th scope="row" style="text-align:center;">Date of Birth</th>-->
               <th scope="row" style="text-align:center;">Age Range</th>
               <th scope="row" style="text-align:center;">Gender</th>
               <th scope="row" style="text-align:center;">Ethnicity</th>
@@ -258,7 +259,7 @@ a {
                 <td scope="row"><?php echo $no;?></td>
                 <td><?php echo ucfirst($participants['firstname']);?></td>
                 <td><?php echo ucfirst($participants['lastname']);?></td>
-                <td><?php echo $participants['birthdate'];?></td>
+                <!--<td><?php echo $participants['birthdate'];?></td>-->
                 <td><?php echo $participants['agerange'];?></td>
                 <td><?php echo $participants['gender'];?></td>
                 <td><?php echo ucfirst($participants['ethnicity']);?></td>

@@ -8,18 +8,20 @@
 <html>
 <head>
 <title>Evaluation</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shorcut icon" type="image/png" href="favicon-32x32.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url("iag.jpg");
-  height: 1000px; /* You must set a specified height */
+  /*background-image: url("iag.jpg");*/
+   /*height: 1000px; You must set a specified height */
+  background-color: white;
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
@@ -41,6 +43,8 @@ img {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+  background: rgba(255,255,255,1);
   border-radius: 15px;
 }
 
@@ -88,7 +92,7 @@ hr {
   border: none;
   cursor: pointer;
   width: 49%;
-  min-width: 280px;
+  min-width: 100%;
   opacity: 0.9;
 }
 
@@ -105,7 +109,7 @@ hr {
   border: none;
   cursor: pointer;
   width: 49%;
-  min-width: 280px;
+  min-width: 100%;
   opacity: 0.9;
 }
 
@@ -182,8 +186,10 @@ th {
   height: 9%;
   padding: 25px;
   margin-top: auto;
+  margin-top: 80px;
   font-size: 13px;
 }
+
 </style>
 </head>
 <body>
@@ -315,14 +321,14 @@ th {
     
     <p style="font-size:16px;text-align:center;">The statements below are answerable <br> by Strongly Disagree (1), Disagree (2), Undecided (3), Agree (4), or Strongly Agree (5).</p>  
     <br/>
-    <table class="table-responsive" style="min-width: 230px; margin-left:auto; margin-right: auto; background-color:white;">
+    <table class="table-responsive" style="min-width: 100%; display: flex; display: inherit; overflow-x: auto; margin-left:auto; margin-right: auto; background-color:white; ">
     <tr style="text-align:left;font-size:15px;color:orange;"><td><b>Activity Proper</td></tr>
         <tr>
             <th>Questions</th>
             <th>Strongly Disagree <br> (1)</th>
-            <th>Disagree (2)</th>
-            <th>Undecided (3)</th>
-            <th>Agree (4)</th>
+            <th>Disagree <br>(2)</th>
+            <th>Undecided <br>(3)</th>
+            <th>Agree <br>(4)</th>
             <th>Strongly Agree <br> (5)</th>
         </tr>
         
@@ -383,15 +389,15 @@ th {
 
   <!--<p><center>The statements below are answerable by Strongly Disagree (1), Disagree (2), Undecided (3), Agree (4), or Strongly Agree (5).</center></p>-->
     <hr>
-    <table class="table-responsive" style="min-width: 230px; margin-left:auto; margin-right: auto; background-color:white;">
+    <table class="table-responsive" style="width: 100%; display: flex; display: inherit; overflow-x: auto; margin-left:auto; margin-right: auto; background-color:white;">
     <tr style="text-align:left;font-size:15px;color:orange;"><td><b>Sustainability</td></tr>
         <tr>
             <th>Questions</th>
-            <th>Strongly Disagree <br> (1)</th>
-            <th>Disagree (2)</th>
-            <th>Undecided (3)</th>
-            <th>Agree (4)</th>
-            <th>Strongly Agree <br> (5)</th>
+            <th>Strongly <br> Disagree <br> (1)</th>
+            <th>Disagree <br>(2)</th>
+            <th>Undecided<br> (3)</th>
+            <th>Agree <br>(4)</th>
+            <th>Strongly <br> Agree <br> (5)</th>
         </tr>
         <tr>
             <td style="width:55%;">7. I will share my learnings from this activity with members of my community.</td>
@@ -450,16 +456,16 @@ th {
         <input type="text"  name="ques14" id="ques14" />
         <br/>
 
-    <table class="table-responsive" style="min-width: 230px; margin-left:auto; margin-right: auto; background-color:white;">
+    <table class="table-responsive" style="width: 100%; display: flex; display: inherit; overflow-x: auto; display: block; margin-left:auto; margin-right: auto; background-color:white;">
         <tr>
             <td></td>
-            <th>Not familiar at all</th>
-            <th>Slightly familiar</th>
-            <th>Moderately familiar</th>
+            <th>Not familiar<br> at all</th>
+            <th>Slightly<br>familiar</th>
+            <th>Moderately<br> familiar</th>
             <th>Very familiar</th>
         </tr>
         <tr>
-            <td style="width:55%;">15. Rate your level of familiarity with IAGs' work</td>
+            <td style="width:55%;">15. Rate your level of familiarity with Institute for Autonomy and Governance (IAG) work</td>
             <th><input type="radio"  name="ques15" value="Not familiar at all"></th>
             <th><input type="radio"  name="ques15" value="Slightly familiar"></th>
             <th><input type="radio"  name="ques15" value="Moderately familiar"></th>

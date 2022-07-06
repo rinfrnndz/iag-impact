@@ -1,0 +1,6 @@
+[02-Jul-2022 07:41:56 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/we86rgqtkoml/public_html/iag-impact/server.php on line 8
+[02-Jul-2022 07:42:07 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/we86rgqtkoml/public_html/iag-impact/server.php on line 8
+[02-Jul-2022 08:07:15 UTC] PHP Notice:  session_start(): A session had already been started - ignoring in /home/we86rgqtkoml/public_html/iag-impact/logout.php on line 2
+[04-Jul-2022 01:13:52 UTC] PHP Notice:  session_start(): A session had already been started - ignoring in /home/we86rgqtkoml/public_html/iag-impact/logout.php on line 2
+[04-Jul-2022 02:06:51 UTC] PHP Notice:  session_start(): A session had already been started - ignoring in /home/we86rgqtkoml/public_html/iag-impact/logout.php on line 2
+[04-Jul-2022 02:58:59 UTC] PHP Notice:  session_start(): A session had already been started - ignoring in /home/we86rgqtkoml/public_html/iag-impact/logout.php on line 2

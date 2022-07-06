@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="shorcut icon" type="image/png" href="favicon-32x32.png">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -16,8 +17,9 @@
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url("iag.jpg");
-  height: 1000px; /* You must set a specified height */
+  /*background-image: url("iag.jpg");*/
+  background-color: white;
+  /*height: 1000px;  You must set a specified height */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
@@ -40,6 +42,8 @@ img {
   margin-right: auto;
   width: 80%;
   border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+  background: rgba(255,255,255,1);
 }
 
 /* Full-width input fields */
@@ -89,7 +93,7 @@ hr {
   border: none;
   cursor: pointer;
   width: 49%;
-  min-width: 280px;
+  min-width: 100%;
   opacity: 0.9;
 }
 
@@ -110,7 +114,7 @@ hr {
   border: none;
   cursor: pointer;
   width: 49%;
-  min-width: 280px;
+  min-width: 100%;
   opacity: 0.9;
 }
 
@@ -147,6 +151,7 @@ p {
   height: 9%;
   padding: 25px;
   margin-top: auto;
+  margin-top: 65px;
   font-size: 13px;
 }
 
@@ -183,7 +188,7 @@ p {
       $acttitle = $_POST['activity_title'];
       $namef = $_POST['fname'];
       $namel = $_POST['lname'];
-      $birthday = $_POST['dob'];
+      //$birthday = $_POST['dob'];
       $age = $_POST['age_range'];
       $sex = $_POST['sgender'];
       $ethnici = $_POST['ethnic'];
@@ -198,8 +203,8 @@ p {
       $orgmobile = $_POST['officeno'];
       $orgemail = $_POST['office_email'];
 
-      $sql1 = "INSERT INTO participants (act_id, firstname, lastname, birthdate, agerange, gender, ethnicity, city_municipality, province, mobileno, email, education, othereduc, org_office, position, org_no, org_email)
-                  VALUES ('$acttitle','$namef','$namel','$birthday','$age','$sex','$ethnici','$ct','$prvince','$mobile','$emailad','$attainment','$othereducation','$org','$postion','$orgmobile','$orgemail')";
+      $sql1 = "INSERT INTO participants (act_id, firstname, lastname, agerange, gender, ethnicity, city_municipality, province, mobileno, email, education, othereduc, org_office, position, org_no, org_email)
+                  VALUES ('$acttitle','$namef','$namel','$age','$sex','$ethnici','$ct','$prvince','$mobile','$emailad','$attainment','$othereducation','$org','$postion','$orgmobile','$orgemail')";
       $query1 = mysqli_query($connect, $sql1);
 
       if($query1) {
@@ -234,8 +239,8 @@ p {
     <label for="lname"><b>Last Name</b></label>
     <input type="text" placeholder="Enter your Last Name" name="lname" id="lname" required>
 
-    <label for="dob"><b>Date of Birth</b></label>
-    <input type="date" placeholder="Enter Activity Date" name="dob" id="dob" >
+    <!--<label for="dob"><b>Date of Birth</b></label>
+    <input type="date" placeholder="Enter Activity Date" name="dob" id="dob" >-->
       
     <br>
     <label for="age"><b>Age Range</b></label>

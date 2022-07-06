@@ -163,8 +163,8 @@ hr {
 
 </style>
 <script type="text/javasript" src="jquery-3.6.0.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shorcut icon" type="image/png" href="favicon-32x32.png">
 </head>
 <body>
 
