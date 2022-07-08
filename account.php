@@ -4,7 +4,7 @@
   session_start();
   
   if(!isset($_SESSION['username'])) {
-      header ("location: login.php");
+      header ("location: login");
   }
 
   $progamadmin = $_SESSION['username'];
@@ -137,10 +137,22 @@ a {
           <th colspan="2" style="text-align: center;">Option/s</th>
       </tr>
     </thead>
-        <?php 
+        <?php
+
+          $results_per_page = 10; //number every page
+          $page = '';
+          if (!isset($_GET['page'])) {
+            $page = 1;
+          } else {
+            $page = $_GET['page'];
+          }
+          $this_page_first_result = ($page-1)*$results_per_page;
+
           $no = 1;
-            $program = "SELECT * FROM projectcode projects, activities activity WHERE projects.projects_id=activity.projects_id AND projects.project_code = '$progamadmin' ORDER BY `timestamp` DESC";
+            $program = "SELECT * FROM projectcode projects, activities activity WHERE projects.projects_id=activity.projects_id AND projects.project_code = '$progamadmin' ORDER BY `timestamp` DESC LIMIT $this_page_first_result, $results_per_page ";
             $progresult = mysqli_query($connect,$program);
+            $number_of_results = mysqli_num_rows($progresult);
+
             while($progrow=mysqli_fetch_array($progresult)) {
               //$actvtyID = $progrow['acty_id'];
         ?>
@@ -155,9 +167,24 @@ a {
         </tr>
         <?php
           $no++;
-          } 
+          }
+          
         ?>
-    </table><br/>
+    </table> <br/>
+    <div align= "center">
+      <?php
+        $page_query = "SELECT * FROM projectcode projects, activities activity WHERE projects.projects_id=activity.projects_id AND projects.project_code = '$progamadmin' ORDER BY activity.id";
+        $page_result = mysqli_query($connect,$page_query);
+        $total_records = mysqli_num_rows($page_result);
+        $number_of_page = ceil($total_records/$results_per_page);
+        
+        //starting_limit_number = (page_number-1)*results_per_page;
+        for ($page=1;$page<=$number_of_page;$page++){
+          echo '<a style="padding:10px;" href="account?' .$progrow['id']. 'page=' .$page. ' ">'. $page .'</a>';
+        }
+      ?>
+    </div>
+   
   
   </div><br>
 
