@@ -1,7 +1,20 @@
-//Getting the MEAN of each Question
+//Getting the PERCENTAGE of each Question
 SELECT q1,CAST((SUM(q1)/COUNT(q1))*100 AS DECIMAL(10,2)) AS MEAN1 
 FROM evaluation eval WHERE acty_id='18';
 
+<tr>
+            <th colspan="" style="text-align: right;">Mean</th>
+            <td><?php echo $percentforq1['PERCENTAGE1'];?></td>
+            <td><?php echo $meanforq2['MEAN2'];?></td>
+            <td><?php echo $meanforq3['MEAN3'];?></td>
+            <td><?php echo $meanforq4['MEAN4'];?></td>
+            <td><?php echo $meanforq5['MEAN5'];?></td>
+            <td><?php echo $meanforq6['MEAN6'];?></td>
+            <td><?php echo $meanforq7['MEAN7'];?></td>
+            <td><?php echo $meanforq8['MEAN8'];?></td>
+            <td><?php echo $meanforq9['MEAN9'];?></td>
+            <td><?php echo $meanforq10['MEAN10'];?></td>
+          </tr>
 ===============================================
 
 //Getting of the Average/MEAN of each Question

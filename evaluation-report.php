@@ -101,7 +101,7 @@ hr {
   }
 </script>
 <form action="" method="POST">
-  <select class="" name="evaluation_list" id="evaluation_list" onchange="showUser(this.value)" style="margin-left:75%;padding:10px; max-width:auto; width:25%; margin-bottom:1%;">
+  <select class="" name="evaluation_list" id="evaluation_list" onchange="showUser(this.value)" style="margin-left:65%;padding:10px; max-width:auto; width:35%; margin-bottom:1%;">
     <option disabled='disabled' selected='selected'>--Select--</option>
   <?php
    $select = mysqli_query($connect, "SELECT * FROM projectcode projects, activities activity, evaluation eval WHERE activity.id=eval.acty_id AND projects.projects_id=activity.projects_id AND projects.project_code = '$progamadmin' GROUP BY eval.acty_id ORDER BY `timestamp` DESC "); 
@@ -112,7 +112,7 @@ hr {
   </select>
 </form>
 
-<div id="evaluation_data"><b>Feedback Report will be displayed here....</b></div><br>
+<div id="evaluation_data"><b>Feedback Report will be displayed here....</b></div>
 
 </body>
 </html>

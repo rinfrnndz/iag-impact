@@ -8,9 +8,7 @@
   //SQL for displaying the participants of specific activity
     $programadmin = $_SESSION['username'];
     $actvtyID = $_GET['id'];
-    $qryforthreetables = "SELECT * FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' GROUP BY p.id ";
-    $qrytoshowparticipants = mysqli_query($connect, $qryforthreetables);
-    $number_of_results = mysqli_num_rows($qrytoshowparticipants);
+    
 ?>
 
 <!DOCTYPE html>
@@ -250,8 +248,21 @@ a {
           <tbody>
 
             <?php
-              $result_per_page = 10;
+              /*$results_per_page = 10; //number every page
+              $page = '';
+              if (!isset($_GET['page'])) {
+                $page = 1;
+              } else {
+                $page = $_GET['page'];
+              }
+              $this_page_first_result = ($page-1)*$results_per_page;*/
+
               $no = 1;
+              $qryforthreetables = " SELECT * FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' GROUP BY p.id ";
+              //SELECT * FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' GROUP BY p.id LIMIT $this_page_first_result, $results_per_page
+              $qrytoshowparticipants = mysqli_query($connect, $qryforthreetables);
+              $number_of_results = mysqli_num_rows($qrytoshowparticipants);
+
               while ($participants = mysqli_fetch_array($qrytoshowparticipants)) {
                 
             ?>
@@ -277,20 +288,24 @@ a {
             <?php
                 $no++;
               }
-              /*$number_of_page = ceil($number_of_results/$result_per_page);
-              if (!isset($_GET['page'])) {
-                $page = 1;
-              } else {
-                $page = $_GET['page'];
-              }
-              $this_page_first_result = ($page-1)*$result_per_page;
-              //starting_limit_number = (page_number-1)*results_per_page;
-              for ($page=1;$page<=$number_of_page;$page++){
-                echo '<a style="padding:10px;" href="display.php?id=' .$actvtyID. '?page=' .$page. ' ">'. $page .'</a>';
-              }*/
+             
             ?>
           </tbody>
-      </table>
+          
+      </table><br/>
+        <!-- <div align= "center">
+          <?php
+            /*$page_query = "SELECT * FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' ORDER BY acty.id";
+            $page_result = mysqli_query($connect,$page_query);
+            $total_records = mysqli_num_rows($page_result);
+            $number_of_page = ceil($total_records/$results_per_page);
+             
+            //starting_limit_number = (page_number-1)*results_per_page;
+            for ($page=1;$page<=$number_of_page;$page++){
+              echo '<a style="padding:10px;" href="display?id=' .$actvtyID. '?page=' .$page. ' ">' .$page. '</a>';
+            }*/
+          ?>
+        </div> -->
     </div><!-- div for tab-->
 
     <input type="radio" id="tabsummary" name="mytabs">
@@ -329,13 +344,13 @@ a {
       
       <table class="counts">
         <?php //For Age Range COUNT
-            $agecount = "SELECT 
-                            SUM(IF(agerange BETWEEN 15 and 25,1,0)) as '15-25',
-                            SUM(IF(agerange BETWEEN 26 and 35,1,0)) as '26-35',
-                            SUM(IF(agerange BETWEEN 36 and 45,1,0)) as '36-45',
-                            SUM(IF(agerange BETWEEN 46 and 55,1,0)) as '46-55',
-                            SUM(IF(agerange BETWEEN 56 and 65,1,0)) as '56-65',
-                            SUM(IF(agerange >=65, 1, 0)) as 'Over65'
+            $agecount = "SELECT agerange,
+                          COUNT(CASE agerange WHEN '15 - 25' THEN 1 ELSE NULL END) as '15-25',
+                          COUNT(CASE agerange WHEN '26 - 35' THEN 1 ELSE NULL END) as '26-35',
+                          COUNT(CASE agerange WHEN '36 - 45' THEN 1 ELSE NULL END) as '36-45',
+                          COUNT(CASE agerange WHEN '46 - 55' THEN 1 ELSE NULL END) as '46-55',
+                          COUNT(CASE agerange WHEN '56 - 65' THEN 1 ELSE NULL END) as '56-65',
+                          COUNT(CASE agerange WHEN 'Over 65' THEN 1 ELSE NULL END) as 'Over 65'
                           FROM projectcode projcode, activities acty, participants p 
                           WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' GROUP BY acty.id ";
             $sqlforagerange = mysqli_query($connect, $agecount);
@@ -364,7 +379,7 @@ a {
           </tr>
           <tr>
             <td><b>(Over 65)</td>
-            <td><?php echo $age_count['Over65'];?></td>
+            <td><?php echo $age_count['Over 65'];?></td>
           </tr>
       </table>
       <!-- //For Ethnicity COUNT -->

@@ -160,10 +160,10 @@ a {
           <td><?php echo $no;?></td>
           <td><?php echo ucfirst($progrow['activity_title']);?></td>
           <td><?php echo $progrow['activity_date'];?></td>
-          <td><a href="display.php?id=<?php echo $progrow['id'];?>" class="btn btn-info">View Participants</a></td>
-          <td><input type="checkbox" id="status" name="status" value="">&nbsp; &nbsp;Hide from the lists</td>
-          <!--<td><a href="#?id=<?php //echo $progrow['id']; ?>" class="btn btn-primary">See Evaluation</a></td>
-          <td><button type="button" id="displaydetailsbtn" class="btn btn-primary">View Participants</button></td>-->
+          <td><a href="display?id=<?php echo $progrow['id'];?>" class="btn btn-info">View Participants</a></td>
+          <!--<td><input type="checkbox" id="status" name="status" value="">&nbsp; &nbsp;Hide from the lists</td>-->
+          <td><a href="activity-update?id=<?php echo $progrow['id']; ?>" class="btn btn-primary">Update Status</a></td>
+          
         </tr>
         <?php
           $no++;
