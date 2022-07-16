@@ -1,12 +1,14 @@
 <?php include 'server.php';
   error_reporting(0);
   session_start();
-    
-  $pcode = $_POST['pcodes'];
-  $atitle = $_POST['title'];
-  $adate = $_POST['actdate'];
 
+  $programadmin = $_SESSION['username'];
+  $actvtyID = $_GET['id'];
   
+    $update_activity = "SELECT * FROM projectcode projects, activities activity WHERE projects.projects_id=activity.projects_id AND projects.project_code = '$programadmin' AND activity.id='$actvtyID' ";
+    $update_qry_activity = mysqli_query($connect, $update_activity);
+    $updates_of_activity = mysqli_num_rows($update_qry_activity);
+    
 ?>
 
 <!DOCTYPE html>
@@ -171,42 +173,31 @@ a {
 <div class="container">
   <form action="" method="POST" class="signin">
     <?php
-      if(isset($_POST['submit'])) {
-        $sqlduplicate = mysqli_query($connect,"SELECT `activity_title`, `activity_date` FROM `activities` WHERE activity_title='$atitle' ");
-          if(mysqli_num_rows($sqlduplicate) > 0 ) {
-            echo "<div class='alert alert-danger' style='width:80%; margin-left:10%; margin-right:10%;'><strong>Warning!</strong>&nbsp;Activity Title already exists.</div>";
-          } else {
-            $insert = "INSERT INTO activities (projects_id, activity_title, activity_date) VALUES ('$pcode', '$atitle','$adate')";
-            $querytitle = mysqli_query($connect, $insert);
-               
-                echo "<div class='alert alert-success' style='width:100%;'><strong>Success!</strong>&nbsp;Activity Title added.</div>";
-          }
-      }
+      
     ?>
-    <h1>Adding Activity Title</h1>
-    <p>Please fill in this form to add activity title and date.</p>
+    <h2>Update Activity Details</h2>
+    <p>In this form, you can edit or update the visibility of the activity title</p>
     <hr>
 
+    <?php
+        while($retrieve_row = mysqli_fetch_assoc($update_qry_activity)) {
+    ?>
+
     <label for="pcode"><b>Project Code</b></label>
-      <select name="pcodes" required>
-        <option disabled='disabled' selected='selected'>--Select Project Code--</option>
-        <?php $activitytable = mysqli_query($connect, "select * from projectcode");
-          while ($row=mysqli_fetch_array($activitytable)) {
-        ?>
-          <option value="<?php echo $row['projects_id'];?>"><?php echo $row['project_code'];?></option>
-        <?php 
-          }
-        ?>
-      </select>
-    <br/><br/>
+    <input type="text" value="<?php echo $retrieve_row['project_code'];?>" name="title" id="title" disabled>
+    
     <label for="title"><b>Activity Title</b></label>
-    <input type="text" placeholder="Enter your Activity Title" name="title" id="title" required>
+    <input type="text" value="<?php echo $retrieve_row['activity_title'];?>" name="title" id="title" required>
 
     <label for="actdate"><b>Activity Date</b></label>
-    <input type="date" placeholder="Enter Activity Date" name="actdate" id="actdate" required>
-         
+    <input type="text" placeholder="<?php echo $retrieve_row['activity_date'];?>" name="actdate" id="actdate" required>
+    <input type="checkbox" id="status" name="status" value="">&nbsp; &nbsp;Hide from the list/s
+    <hr>
     <button type="submit" name="submit" class="updatebtn">Update Title</button>
     <button type="reset" name="reset" class="clearbtn">Cancel</button>
+    <?php
+     }
+    ?>
   </form>
 </div>
     

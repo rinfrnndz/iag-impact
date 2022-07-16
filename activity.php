@@ -1,7 +1,9 @@
 <?php include 'server.php';
   error_reporting(0);
   session_start();
-    
+  
+  $program_admin = $_SESSION['username'];
+
   $pcode = $_POST['pcodes'];
   $atitle = $_POST['title'];
   $adate = $_POST['actdate'];
@@ -86,7 +88,7 @@ hr {
   margin: 10px 0;
   border: none;
   cursor: pointer;
-  min-width: 280px;
+  min-width: 100%;
   opacity: 0.9;
   width: 50%;
 }
@@ -102,7 +104,7 @@ hr {
   margin: 10px 0;
   border: none;
   cursor: pointer;
-  min-width: 280px;
+  min-width: 100%;
   width: 49.6%;
   opacity: 0.9;
 }
@@ -186,19 +188,20 @@ a {
     <h1>Adding Activity Title</h1>
     <p>Please fill in this form to add activity title and date.</p>
     <hr>
-
-    <label for="pcode"><b>Project Code</b></label>
-      <select name="pcodes" required>
-        <option disabled='disabled' selected='selected'>--Select Project Code--</option>
-        <?php $activitytable = mysqli_query($connect, "select * from projectcode");
+      <?php 
+      //SELECT * FROM projectcode projects, activities activity WHERE projects.projects_id=activity.projects_id AND projects.project_code = '$programadmin' AND activity.id='$actvtyID' ";
+          $activitytable = mysqli_query($connect, "SELECT * FROM projectcode WHERE project_code = '$program_admin' ");
           while ($row=mysqli_fetch_array($activitytable)) {
         ?>
-          <option value="<?php echo $row['projects_id'];?>"><?php echo $row['project_code'];?></option>
-        <?php 
+    <label for="pcode"><b>Project ID</b></label>
+    <input type="text" value="<?php echo $row['projects_id'];?>" name="pcodes" id="title" disabled>
+      
+    <label for="pcode"><b>Project Code</b></label>
+    <input type="text" value="<?php echo $row['project_code'];?>" disabled>
+      <?php 
           }
-        ?>
-      </select>
-    <br/><br/>
+      ?>
+    
     <label for="title"><b>Activity Title</b></label>
     <input type="text" placeholder="Enter your Activity Title" name="title" id="title" required>
 
