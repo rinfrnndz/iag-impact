@@ -184,6 +184,8 @@ a {
   background-color: #F5F5F5;
 }
 
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
 </style>
 <script type="text/javasript" src="jquery-3.6.0.js"></script>
     <meta charset="utf-8">
@@ -203,16 +205,18 @@ a {
         <span class="icon-bar"></span>                        
       </button>
     </div>
+
     <div class="collapse navbar-collapse" id="myNavbar" >
       <ul class="nav navbar-nav" >
-        <li class="active"><a href="account.php" style="border-radius: 50%; font-size:22px;">&laquo;</a></li>
-        <li><a href="activity.php">Add Activity</a></li>
-        <li><a href="evaluation-report.php">Evaluation Report</a></li>
+        <li class="active"><a href="account.php" style="font-size:16px; font-family: Calibri;">❮</a></li>
+        <li><a href="activity.php" style="font-size:16px; font-family: Calibri;">Add Activity</a></li>
+        <li><a href="evaluation-report.php" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a href="logout.php" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
     </div>
+
   </div>
 </nav>
 
@@ -248,64 +252,74 @@ a {
           <tbody>
 
             <?php
-              /*$results_per_page = 10; //number every page
-              $page = '';
-              if (!isset($_GET['page'])) {
-                $page = 1;
-              } else {
-                $page = $_GET['page'];
-              }
-              $this_page_first_result = ($page-1)*$results_per_page;*/
+              $results_per_page = 10; //number every page
+              //$page = '';
+              if (isset($_GET['page'])) { $page = $_GET['page']; } else { $page = 1; };
+              $this_page_first_result = ($page-1)*$results_per_page;
 
-              $no = 1;
-              $qryforthreetables = " SELECT * FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' GROUP BY p.id ";
-              //SELECT * FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' GROUP BY p.id LIMIT $this_page_first_result, $results_per_page
+              $qryforthreetables = "SELECT * FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' ORDER BY p.id ASC LIMIT $this_page_first_result, $results_per_page ";
+              //SELECT * FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' GROUP BY p.id
               $qrytoshowparticipants = mysqli_query($connect, $qryforthreetables);
               $number_of_results = mysqli_num_rows($qrytoshowparticipants);
-
+              
+              $no = 1;
               while ($participants = mysqli_fetch_array($qrytoshowparticipants)) {
-                
+                $participants_fname = $participants['firstname'];
+                $participants_lname = $participants['lastname'];
+                $participants_age = $participants['agerange'];
+                $participants_gender = $participants['gender'];
+                $participants_ethnic = $participants['ethnicity'];
+                $participants_c_m = $participants['city_municipality'];
+                $participants_province = $participants['province'];
+                $participants_mobile_no = $participants['mobileno'];
+                $participants_email = $participants['email'];
+                $participants_education = $participants['education'];
+                $participants_others = $participants['othereduc'];
+                $participants_office = $participants['org_office'];
+                $participants_position = $participants['position'];
+                $participants_office_no = $participants['org_no'];
+                $participants_office_email = $participants['org_email'];
             ?>
               <tr>
-                <td scope="row"><?php echo $no;?></td>
-                <td><?php echo ucfirst($participants['firstname']);?></td>
-                <td><?php echo ucfirst($participants['lastname']);?></td>
+                <td><?php echo $no;?></td>
+                <td><?php echo ucfirst($participants_fname);?></td>
+                <td><?php echo ucfirst($participants_lname);?></td>
                 <!--<td><?php echo $participants['birthdate'];?></td>-->
-                <td><?php echo $participants['agerange'];?></td>
-                <td><?php echo $participants['gender'];?></td>
-                <td><?php echo ucfirst($participants['ethnicity']);?></td>
-                <td><?php echo ucfirst($participants['city_municipality']);?></td>
-                <td><?php echo ucfirst($participants['province']);?></td>
-                <td><?php echo $participants['mobileno'];?></td>
-                <td><?php echo $participants['email'];?></td>
-                <td><?php echo ucfirst($participants['education']);?></td>
-                <td><?php echo ucfirst($participants['othereduc']);?></td>
-                <td><?php echo ucfirst($participants['org_office']);?></td>
-                <td><?php echo ucfirst($participants['position']);?></td>
-                <td><?php echo $participants['org_no'];?></td>
-                <td><?php echo $participants['org_email'];?></td>
+                <td><?php echo $participants_age;?></td>
+                <td><?php echo $participants_gender;?></td>
+                <td><?php echo ucfirst($participants_ethnic);?></td>
+                <td><?php echo ucfirst($participants_c_m);?></td>
+                <td><?php echo ucfirst($participants_province);?></td>
+                <td><?php echo $participants_mobile_no;?></td>
+                <td><?php echo $participants_email;?></td>
+                <td><?php echo ucfirst($participants_education);?></td>
+                <td><?php echo ucfirst($participants_others);?></td>
+                <td><?php echo ucfirst($participants_office);?></td>
+                <td><?php echo ucfirst($participants_position);?></td>
+                <td><?php echo $participants_office_no;?></td>
+                <td><?php echo $participants_office_email;?></td>
               </tr>
-            <?php
-                $no++;
+            
+          </tbody>
+          <?php
+                $no ++;
               }
              
             ?>
-          </tbody>
-          
       </table><br/>
-        <!-- <div align= "center">
+        <div align= "center" >
           <?php
-            /*$page_query = "SELECT * FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' ORDER BY acty.id";
-            $page_result = mysqli_query($connect,$page_query);
-            $total_records = mysqli_num_rows($page_result);
-            $number_of_page = ceil($total_records/$results_per_page);
-             
-            //starting_limit_number = (page_number-1)*results_per_page;
-            for ($page=1;$page<=$number_of_page;$page++){
-              echo '<a style="padding:10px;" href="display?id=' .$actvtyID. '?page=' .$page. ' ">' .$page. '</a>';
-            }*/
+            $page_query = "SELECT COUNT(*) FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' ORDER BY acty.id";
+            $page_result = mysqli_query($connect, $page_query);
+            $total_records = mysqli_fetch_array($page_result);
+            $total_of_records = $total_records[0];
+            $number_of_page = ceil($total_of_records/$results_per_page);
+            
+            for ($page=1; $page<=$number_of_page; $page++){
+              echo '<a style="padding:8px; background:black; border-radius:11px; margin: 0 2px; color:white; font-family: Arial;" href="display?id=' .$actvtyID. '&page=' .$page. ' ">' .$page. '</a>';
+            }
           ?>
-        </div> -->
+        </div>
     </div><!-- div for tab-->
 
     <input type="radio" id="tabsummary" name="mytabs">

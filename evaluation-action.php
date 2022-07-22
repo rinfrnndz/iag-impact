@@ -1,11 +1,12 @@
 <?php include 'server.php';
     
-  error_reporting (0);
+  error_reporting ();
   session_start ();
 
   if(!isset($_SESSION['username'])) {
     header ("location: login.php");
   }
+
   $progamadmin = $_SESSION['username'];
   $q = intval($_GET['q']);
 ?>
@@ -213,18 +214,21 @@ hr {
       
       <tbody>
         <?php
+          $results_per_page = 5; //number every page
+          $page = '';
+          if (isset($_GET['page'])) { $page = $_GET['page']; } else { $page = 1; };
+          $this_page_first_result = ($page-1)*$results_per_page;
           
-          $result_per_page = 10;
-          
-          $evaluationsql = "SELECT * FROM projectcode projects, activities activity, evaluation eval WHERE activity.id=eval.acty_id AND eval.acty_id='$q' AND projects.projects_id=activity.projects_id AND projects.project_code = '$progamadmin' ORDER BY `timestamp` DESC";
+          $evaluationsql = "SELECT * FROM projectcode projects, activities activity, evaluation eval WHERE activity.id=eval.acty_id AND eval.acty_id='$q' AND projects.projects_id=activity.projects_id AND projects.project_code = '$progamadmin' ORDER BY `timestamp` DESC LIMIT $this_page_first_result, $results_per_page";
           $evaluationresult = mysqli_query($connect, $evaluationsql);
           $number_of_results = mysqli_num_rows($evaluationresult);
 
-          while($evaluationrow=mysqli_fetch_array($evaluationresult)) {
           $no = 1;
+          while($evaluationrow=mysqli_fetch_array($evaluationresult)) {
+          
         ?>
         <tr>
-          <!--<td data-label=""><?php echo $no;?></td>-->
+          <td data-label=""><?php echo $no;?></td>
           <td data-label=""><?php echo ucfirst($evaluationrow['first_name']);?></td>
           <td ><?php echo ucfirst($evaluationrow['last_name']);?></td>
           <!-- <td><?php //echo ($evaluationrow['birthday']);?></td> -->
@@ -251,84 +255,24 @@ hr {
         <?php
             $no++;
           }
-          
         ?>
       </tr>
-      </tbody>
-      
-    <!--  <tfoot>
-      <?php
-        //Total for Question1
-        $total1 = "SELECT q1,SUM(q1) AS TOTALQ1 FROM evaluation eval WHERE eval.acty_id='$q' ";
-        $q1ttl = mysqli_query($connect, $total1);
-        $q1_total = mysqli_fetch_array($q1ttl);
-
-        //Total for Question2
-        $total2 = "SELECT q2,SUM(q2) AS TOTALQ2 FROM evaluation eval WHERE eval.acty_id='$q' ";
-        $q2ttl = mysqli_query($connect, $total2);
-        $q2_total = mysqli_fetch_array($q2ttl);
-
-        //Total for Question3
-        $total3 = "SELECT q3,SUM(q3) AS TOTALQ3 FROM evaluation eval WHERE eval.acty_id='$q' ";
-        $q3ttl = mysqli_query($connect, $total3);
-        $q3_total = mysqli_fetch_array($q3ttl);
-
-        //Total for Question4
-        $total4 = "SELECT q4,SUM(q4) AS TOTALQ4 FROM evaluation eval WHERE eval.acty_id='$q' ";
-        $q4ttl = mysqli_query($connect, $total4);
-        $q4_total = mysqli_fetch_array($q4ttl);
-
-        //Total for Question5
-        $total5 = "SELECT q5,SUM(q5) AS TOTALQ5 FROM evaluation eval WHERE eval.acty_id='$q' ";
-        $q5ttl = mysqli_query($connect, $total5);
-        $q5_total = mysqli_fetch_array($q5ttl);
-
-        //Total for Question6
-        $total6 = "SELECT q6,SUM(q6) AS TOTALQ6 FROM evaluation eval WHERE eval.acty_id='$q' ";
-        $q6ttl = mysqli_query($connect, $total6);
-        $q6_total = mysqli_fetch_array($q6ttl);
-
-        //Total for Question7
-        $total7 = "SELECT q7,SUM(q7) AS TOTALQ7 FROM evaluation eval WHERE eval.acty_id='$q' ";
-        $q7ttl = mysqli_query($connect, $total7);
-        $q7_total = mysqli_fetch_array($q7ttl);
-
-        //Total for Question8
-        $total8 = "SELECT q8,SUM(q8) AS TOTALQ8 FROM evaluation eval WHERE eval.acty_id='$q' ";
-        $q8ttl = mysqli_query($connect, $total8);
-        $q8_total = mysqli_fetch_array($q8ttl);
-
-        //Total for Question9
-        $total9 = "SELECT q9,SUM(q9) AS TOTALQ9 FROM evaluation eval WHERE eval.acty_id='$q' ";
-        $q9ttl = mysqli_query($connect, $total9);
-        $q9_total = mysqli_fetch_array($q9ttl);
-
-        //Total for Question10
-        $total10 = "SELECT q10,SUM(q10) AS TOTALQ10 FROM evaluation eval WHERE eval.acty_id='$q' ";
-        $q10ttl = mysqli_query($connect, $total10);
-        $q10_total = mysqli_fetch_array($q10ttl);
-
-        //Total for Question11
-        $total11 = "SELECT q11,SUM(q11) AS TOTALQ11 FROM evaluation eval WHERE eval.acty_id='$q' ";
-        $q11ttl = mysqli_query($connect, $total11);
-        $q11_total = mysqli_fetch_array($q11ttl);
-      ?>
-        <tr>
-          <th colspan="9" style="text-align: right;">Total:</th>
-          <td><?php echo $q1_total['TOTALQ1'];?></td>
-          <td><?php echo $q2_total['TOTALQ2'];?></td>
-          <td><?php echo $q3_total['TOTALQ3'];?></td>
-          <td><?php echo $q4_total['TOTALQ4'];?></td>
-          <td><?php echo $q5_total['TOTALQ5'];?></td>
-          <td><?php echo $q6_total['TOTALQ6'];?></td>
-          <td><?php echo $q7_total['TOTALQ7'];?></td>
-          <td><?php echo $q8_total['TOTALQ8'];?></td>
-          <td><?php echo $q9_total['TOTALQ9'];?></td>
-          <td><?php echo $q10_total['TOTALQ10'];?></td>
-          <td><?php echo $q11_total['TOTALQ11'];?></td>
-        </tr>
-      </tfoot> -->    
+    </tbody>
+     
     </table>
+      <div align= "center">
+        <?php
+          $page_query = "SELECT COUNT(*) FROM projectcode projects, activities activity, evaluation eval WHERE activity.id=eval.acty_id AND eval.acty_id='$q' AND projects.projects_id=activity.projects_id AND projects.project_code = '$progamadmin' ";
+          $page_result = mysqli_query($connect, $page_query);
+          $total_records = mysqli_fetch_array($page_result);
+          $total_of_records = $total_records[0];
+          $number_of_page = ceil($total_of_records/$results_per_page);
+          
+          for ($page=1; $page<=$number_of_page; $page++){
+            echo '<a style="padding:7px; background:wheat; border:1px solid gray; color:black;" href="evaluation-report?' .$evaluationrow['acty_id']. '&page=' .$page. ' ">' .$page. '</a>';
+          }
+        ?>
+       </div>
   </div> <!-- div for tab -->
 
   <input type="radio" id="tabsummary" name="mytabs">

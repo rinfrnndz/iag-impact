@@ -158,7 +158,7 @@ p {
 </style>
 </head>
 <body>
-<nav class="navbar navbar-default" style="font-family: calibri; letter-spacing: 1.1px; font-weight: bold;">
+<nav class="navbar navbar-default" style="font-family: Calibri; letter-spacing: 1.1px; font-weight: bold;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
@@ -168,49 +168,50 @@ p {
                 </button>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar" >
-              <ul class="nav navbar-nav" >
-                  <li><a href="index">Home</a></li>
-                  
-                  <li class="active"><a href="register">Registration Form</a></li>
-                  <li><a href="evaluation-form">Evaluation Form</a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-              </ul>
+            <ul class="nav navbar-nav" >
+                <li><a href="index" style="font-size:16px; font-family: Calibri;">Home</a></li>
+                
+                <li class="active"><a href="register" style="font-size:16px; font-family: Calibri;">Registration Form</a></li>
+                <li style="font-size:16px; font-family: Calibri;"><a href="evaluation-form">Evaluation Form</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="login" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
             </div>
         </div>
-    </nav>
+</nav>
 
 <form action="" method="POST">
   <div class="container">
   <?php
+    $acttitle = $_POST['activity_title'];
+    $namef = $_POST['fname'];
+    $namel = $_POST['lname'];
+    //$birthday = $_POST['dob'];
+    $age = $_POST['age_range'];
+    $sex = $_POST['sgender'];
+    $ethnici = $_POST['ethnic'];
+    $ct = $_POST['city_municipality'];
+    $prvince = $_POST['prov'];
+    $mobile = $_POST['phoneno'];
+    $emailad = $_POST['eadd'];
+    $attainment = $_POST['educ'];
+    $othereducation = $_POST['othereducation'];
+    $org = $_POST['office'];
+    $postion = $_POST['post'];
+    $orgmobile = $_POST['officeno'];
+    $orgemail = $_POST['office_email'];
+
     if(isset($_POST['submit'])) {
-      $acttitle = $_POST['activity_title'];
-      $namef = $_POST['fname'];
-      $namel = $_POST['lname'];
-      //$birthday = $_POST['dob'];
-      $age = $_POST['age_range'];
-      $sex = $_POST['sgender'];
-      $ethnici = $_POST['ethnic'];
-      $ct = $_POST['city_municipality'];
-      $prvince = $_POST['prov'];
-      $mobile = $_POST['phoneno'];
-      $emailad = $_POST['eadd'];
-      $attainment = $_POST['educ'];
-      $othereducation = $_POST['othereducation'];
-      $org = $_POST['office'];
-      $postion = $_POST['post'];
-      $orgmobile = $_POST['officeno'];
-      $orgemail = $_POST['office_email'];
-
-      $sql1 = "INSERT INTO participants (act_id, firstname, lastname, agerange, gender, ethnicity, city_municipality, province, mobileno, email, education, othereduc, org_office, position, org_no, org_email)
-                  VALUES ('$acttitle','$namef','$namel','$age','$sex','$ethnici','$ct','$prvince','$mobile','$emailad','$attainment','$othereducation','$org','$postion','$orgmobile','$orgemail')";
-      $query1 = mysqli_query($connect, $sql1);
-
-      if($query1) {
-        echo "<div class='alert alert-warning' style='width:100%; margin-left:auto; margin-right:auto;'><strong>Thank you!</strong>&nbsp;You are now registered to this activity.</div>";
+      $participant_duplicate = mysqli_query($connect, "SELECT act_id, firstname, lastname, agerange, gender, ethnicity  FROM `participants` WHERE  act_id='$acttitle' && firstname='$namef' && lastname='$namel' && agerange='$age' && gender='$sex' && ethnicity='$ethnici' ");
+      
+      if(mysqli_num_rows($participant_duplicate) > 0) {
+        echo "<div class='alert alert-danger' style='width:100%; margin-left:auto; margin-right:auto;'><strong>Warning!</strong>&nbsp;You're already registered to this activity.</div>";
       } else {
-        echo "<div class='alert alert-danger' style='width:100%; margin-left:auto; margin-right:auto;'><strong>Warning!</strong>&nbsp;Something went wrong.</div>";
+        $register_sql = "INSERT INTO participants (act_id, firstname, lastname, agerange, gender, ethnicity, city_municipality, province, mobileno, email, education, othereduc, org_office, position, org_no, org_email)
+                          VALUES ('$acttitle','$namef','$namel','$age','$sex','$ethnici','$ct','$prvince','$mobile','$emailad','$attainment','$othereducation','$org','$postion','$orgmobile','$orgemail')";
+        $register = mysqli_query($connect, $register_sql); 
+        echo "<div class='alert alert-warning' style='width:100%; margin-left:auto; margin-right:auto;'><strong>Thank you!</strong>&nbsp;You are now registered to this activity.</div>";
       }
     }
   ?>
@@ -219,13 +220,14 @@ p {
     <hr>
 
     <label for="activity"><b>Activity Ttitle</b></label>
+    
     <select name="activity_title" required>
-      <option value="" disabled='disabled' selected='selected'>---Select Activity---</option>
+      <option value="" disabled='disabled' selected='selected'>Select Activity Title</option>
         <?php
-            $activities = mysqli_query($connect, "SELECT * FROM activities ORDER BY `timestamp` DESC");
+            $activities = mysqli_query($connect, "SELECT * FROM activities WHERE activities.status='1' ORDER BY `id` DESC ");
             while ($row=mysqli_fetch_array($activities)) {
         ?>
-            <option value="<?php echo $row['id'];?>"><?php echo $row['activity_title'];?></option>
+            <option id="someTable" value="<?php echo $row['id'];?>"><?php echo $row['activity_title'];?></option>
         <?php 
             }
         ?>

@@ -37,10 +37,11 @@ body {
 
 /* Add padding to containers */
 .container {
-  padding: 16px;
+  padding: 20px;
   background-color: white;
   box-shadow: 5px 10px 20px grey;
   border-radius: 12px;
+  width: 80%;
 }
 
 /* Overwrite default styles of hr */
@@ -101,27 +102,28 @@ a {
 </head>
 <body>
 <nav class="navbar navbar-default" style="font-family: calibri; letter-spacing: 1.1px; font-weight: bold;">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>                        
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar" >
-            <ul class="nav navbar-nav" >
-                <li class="active"><a href="account">IAG</a></li>
-                
-                <li><a href="activity">Add Activity</a></li>
-                <li><a href="evaluation-report">Evaluation Report</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-            </ul>
-            </div>
-        </div>
-    </nav>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="myNavbar" >
+      <ul class="nav navbar-nav" >
+        <li class="active"><a href="account.php" style="font-size:16px; font-family: Calibri;">Main</a></li>
+        <li><a href="activity.php" style="font-size:16px; font-family: Calibri;">Add Activity</a></li>
+        <li><a href="evaluation-report.php" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="logout.php" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+    </div>
+    
+  </div>
+</nav>
 
   <div class="container">
     <?php echo "<h2><center>" .$_SESSION['username']. " Report</h1>"; ?></h2>
@@ -161,9 +163,7 @@ a {
           <td><?php echo ucfirst($progrow['activity_title']);?></td>
           <td><?php echo $progrow['activity_date'];?></td>
           <td><a href="display?id=<?php echo $progrow['id'];?>" class="btn btn-info">View Participants</a></td>
-          <!--<td><input type="checkbox" id="status" name="status" value="">&nbsp; &nbsp;Hide from the lists</td>-->
-          <td><a href="activity-update?id=<?php echo $progrow['id']; ?>" class="btn btn-primary">Update Status</a></td>
-          
+          <td><a href="activity-update?id=<?php echo $progrow['id']; ?>" class="btn btn-primary">Update Details</a></td>
         </tr>
         <?php
           $no++;
@@ -180,7 +180,7 @@ a {
         
         //starting_limit_number = (page_number-1)*results_per_page;
         for ($page=1;$page<=$number_of_page;$page++){
-          echo '<a style="padding:10px;" href="account?' .$progrow['id']. 'page=' .$page. ' ">'. $page .'</a>';
+          echo '<a style="padding:8px; background:black; border-radius:11px; margin: 0 2px; color:white; font-family: Arial;" href="account?' .$progrow['id']. 'page=' .$page. ' ">'. $page .'</a>';
         }
       ?>
     </div>
@@ -192,7 +192,7 @@ a {
   <label style="position: left; font-weight: normal; font-family: calibri; font-size:13px;">
     <b>&copy; 2022 <a href="https://iag.org.ph/">Institute for Autonomy and Governance</a></b><br/>
     Notre Dame University, Notre Dame Avenue, Cotabato City<br/>
-    </label>
+  </label>
 </div>
 </body>
 </html>

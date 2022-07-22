@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>jQuery Show Hide Elements Using Checkboxes</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(document).ready(function(){
+    let myColors = JSON.parse(localStorage.getItem('myColors') ?? '[]');
+
+    myColors.forEach(color => $(`[name="colorCheckbox"][value="${color}"]`).attr('checked', true));
+
+    $('input[type="checkbox"]').click(function(){
+        if( $(this).is(':checked') ){
+            myColors = [...myColors, $(this).val()];
+        }else{
+            myColors = myColors.filter(color => color !== $(this).val());
+        }
+
+        localStorage.setItem('myColors', JSON.stringify(myColors));
+    });
+});
+</script>
+</head>
+<body>
+    <div>
+        <label><input type="checkbox" name="colorCheckbox" value="red"> red</label>
+        <label><input type="checkbox" name="colorCheckbox" value="green"> green</label>
+        <label><input type="checkbox" name="colorCheckbox" value="blue"> blue</label>
+    </div>
+</body>
+</html>

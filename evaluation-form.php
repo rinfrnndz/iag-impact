@@ -204,13 +204,13 @@ th {
             </div>
             <div class="collapse navbar-collapse" id="myNavbar" >
             <ul class="nav navbar-nav" >
-                <li><a href="index">Home</a></li>
+                <li><a href="index" style="font-size:16px; font-family: Calibri;">Home</a></li>
                 
-                <li><a href="register">Registration Form</a></li>
-                <li class="active"><a href="evaluation-form">Evaluation Form</a></li>
+                <li><a href="register" style="font-size:16px; font-family: Calibri;">Registration Form</a></li>
+                <li class="active" style="font-size:16px; font-family: Calibri;"><a href="evaluation-form">Evaluation Form</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="login" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
             </div>
         </div>
@@ -267,9 +267,9 @@ th {
 
     <label for="activity"><b>Activity Ttitle</b></label>
     <select name="activity" id="activity" required>
-      <option value="" disabled='disabled' selected='selected'>---Select Activity---</option>
+      <option value="" disabled='disabled' selected='selected'>Select Activity Title</option>
         <?php
-            $activities = mysqli_query($connect, "SELECT * FROM activities ORDER BY `timestamp` DESC");
+            $activities = mysqli_query($connect, "SELECT * FROM activities WHERE activities.status='1' ORDER BY `id` DESC ");
             while ($row=mysqli_fetch_array($activities)) {
         ?>
             <option value="<?php echo $row['id'];?>"><?php echo $row['activity_title'];?></option>

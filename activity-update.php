@@ -171,10 +171,27 @@ a {
     </nav>
 
 <div class="container">
-  <form action="" method="POST" class="signin">
-    <?php
-      
+  <?php
+    if(isset($_POST['update'])) {
+      $update_title = $_POST['update_activity_title'];
+      $update_date = $_POST['update_activity_date'];
+      $update_stat = $_POST['update_activity_status'];
+      //$update_status = $_POST['status'];
+
+      $update_of_activity_data = "UPDATE activities SET activities.activity_title='$update_title', activities.activity_date='$update_date', activities.status='$update_stat' WHERE `activities`.`id`='$actvtyID' ";
+      $update_qry = mysqli_query($connect, $update_of_activity_data);
+
+      if($update_qry) {
+        echo "<div class='alert alert-success' style='width:100%;'><strong>Success!</strong>&nbsp;Updated succesfully.</div>";
+        //header("location: account");
+      } else {
+          echo "<div class='alert alert-danger' style='width:100%; margin-left:10%; margin-right:10%;'><strong>Update failed!</strong>&nbsp;Please repeat the process.</div>";
+        }
+      }
     ?>
+
+  <form action="" method="POST" class="signin">
+    
     <h2>Update Activity Details</h2>
     <p>In this form, you can edit or update the visibility of the activity title</p>
     <hr>
@@ -184,25 +201,26 @@ a {
     ?>
 
     <label for="pcode"><b>Project Code</b></label>
-    <input type="text" value="<?php echo $retrieve_row['project_code'];?>" name="title" id="title" disabled>
+    <input type="text" value="<?= $retrieve_row['project_code'] ?>" name="update_pcode" id="update_pcode" disabled>
     
     <label for="title"><b>Activity Title</b></label>
-    <input type="text" value="<?php echo $retrieve_row['activity_title'];?>" name="title" id="title" required>
+    <input type="text" value="<?= $retrieve_row['activity_title'] ?>" name="update_activity_title" id="update_activity_title" required>
 
     <label for="actdate"><b>Activity Date</b></label>
-    <input type="text" placeholder="<?php echo $retrieve_row['activity_date'];?>" name="actdate" id="actdate" required>
-    <input type="checkbox" id="status" name="status" value="">&nbsp; &nbsp;Hide from the list/s
+    <input type="text" value="<?= $retrieve_row['activity_date'] ?>" name="update_activity_date" id="update_activity_date" required>
+    
+    <label for="status"><b>Status</b></label><br>
+    <input type="checkbox" name="update_activity_status" <?= $retrieve_row['status'] == '0' ? 'unchecked':'' ?> ><label style="font-weight:normal;">&nbsp;Checked / Unchecked to hide Activity Title from the lists</label>
     <hr>
-    <button type="submit" name="submit" class="updatebtn">Update Title</button>
+    <button type="submit" name="update" class="updatebtn" >Update Title</button>
     <button type="reset" name="reset" class="clearbtn">Cancel</button>
     <?php
      }
     ?>
   </form>
+  
 </div>
     
-
-
 <!-- Footer -->
 <div class="footer">
   <label style="position: left; font-weight: normal; font-family: calibri; ">

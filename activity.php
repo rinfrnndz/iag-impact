@@ -8,7 +8,6 @@
   $atitle = $_POST['title'];
   $adate = $_POST['actdate'];
 
-  
 ?>
 
 <!DOCTYPE html>
@@ -148,27 +147,28 @@ a {
 </head>
 <body>
 <nav class="navbar navbar-default" style="font-family: calibri; letter-spacing: 1.1px; font-weight: bold;">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>                        
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar" >
-            <ul class="nav navbar-nav" >
-                <li><a href="account" style="border-radius: 50%; font-size:22px;">&laquo;</a></li>
-                
-                <li class="active"><a href="activity">Add Activity</a></li>
-                <li><a href="evaluation-report">Evaluation Report</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-            </ul>
-            </div>
-        </div>
-    </nav>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="myNavbar" >
+      <ul class="nav navbar-nav" >
+        <li><a href="account.php" style="font-size:16px; font-family: Calibri;">❮</a></li>
+        <li class="active"><a href="activity.php" style="font-size:16px; font-family: Calibri;">Add Activity</a></li>
+        <li><a href="evaluation-report.php" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="logout.php" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+    </div>
+    
+  </div>
+</nav>
 
 <div class="container">
   <form action="" method="POST" class="signin">
@@ -176,12 +176,11 @@ a {
       if(isset($_POST['submit'])) {
         $sqlduplicate = mysqli_query($connect,"SELECT `activity_title`, `activity_date` FROM `activities` WHERE activity_title='$atitle' ");
           if(mysqli_num_rows($sqlduplicate) > 0 ) {
-            echo "<div class='alert alert-danger' style='width:80%; margin-left:10%; margin-right:10%;'><strong>Warning!</strong>&nbsp;Activity Title already exists.</div>";
+            echo "<div class='alert alert-danger' style='width:100%; margin-left:10%; margin-right:10%;'><strong>Warning!</strong>&nbsp;Activity Title already exists.</div>";
           } else {
             $insert = "INSERT INTO activities (projects_id, activity_title, activity_date) VALUES ('$pcode', '$atitle','$adate')";
             $querytitle = mysqli_query($connect, $insert);
-               
-                echo "<div class='alert alert-success' style='width:100%;'><strong>Success!</strong>&nbsp;Activity Title added.</div>";
+              echo "<div class='alert alert-success' style='width:100%;'><strong>Success!</strong>&nbsp;Activity Title added.</div>";
           }
       }
     ?>
@@ -194,10 +193,10 @@ a {
           while ($row=mysqli_fetch_array($activitytable)) {
         ?>
     <label for="pcode"><b>Project ID</b></label>
-    <input type="text" value="<?php echo $row['projects_id'];?>" name="pcodes" id="title" disabled>
+    <input type="text" value="<?php echo $row['projects_id'];?>" name="pcodes" id="pcodes" readonly>
       
     <label for="pcode"><b>Project Code</b></label>
-    <input type="text" value="<?php echo $row['project_code'];?>" disabled>
+    <input type="text" placeholder="<?php echo $row['project_code'];?>" disabled>
       <?php 
           }
       ?>

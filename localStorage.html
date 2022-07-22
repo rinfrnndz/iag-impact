@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>jQuery Show Hide Elements Using Checkboxes</title>
+<style>
+    .box{
+        color: #fff;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    .red{ background: #ff0000; }
+    .green{ background: #228B22; }
+    .blue{ background: #0000ff; }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+$(document).ready(function(){
+    let myColors = JSON.parse(localStorage.getItem('myColors') ?? '[]')
+        .map(color => `<div class="${color} box">You have selected <strong>${color} checkbox</strong> so i am here</div>`)
+        .join('');
+
+    $('#selected-colors').html(myColors)
+});
+</script>
+</head>
+<body>
+    <div id="selected-colors"></div>
+</body>
+</html>
