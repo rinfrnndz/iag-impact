@@ -153,8 +153,28 @@ p {
   margin-top: auto;
   margin-top: 65px;
   font-size: 13px;
+  border-radius: 15px;
 }
 
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: aqua;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  font-family: Arial;
+  font-size: 12px;
+}
+#myBtn {
+  background-color: #555;
+
+}
 </style>
 </head>
 <body>
@@ -180,6 +200,24 @@ p {
             </div>
         </div>
 </nav>
+
+<button onClick="topFunction()" id="myBtn" title="Go to top">Go to top</button>
+<script>
+  window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+      } else {
+        document.getElemenetById("myBtn").style.display = "none";
+      }
+    }
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }  
+  
+</script> <!-- button for GoToTop -->
 
 <form action="" method="POST">
   <div class="container">

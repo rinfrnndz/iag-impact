@@ -41,7 +41,7 @@ img {
   background-color: white;
   width: 70%;
   position: center;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 40px 40px -7px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 40px 60px -7px;
   background: rgba(255,255,255,1);
   border-radius: 15px;
 }
@@ -181,6 +181,7 @@ a {
         } else {
           echo "<div class='alert alert-warning' style='width:100%; margin-left:auto; margin-right:auto;'><strong>Warning!</strong>&nbsp;Username and Password doesn't exist!</div>";
         }
+        
     }
     ?>
     <h1>Login</h1>

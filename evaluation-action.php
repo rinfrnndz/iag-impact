@@ -1,6 +1,6 @@
 <?php include 'server.php';
     
-  error_reporting ();
+  error_reporting (0);
   session_start ();
 
   if(!isset($_SESSION['username'])) {
@@ -177,38 +177,38 @@ hr {
     <table class="table">
       <thead >
           <tr>
-            <!--<th></th>-->
-            <th colspan="8">Basic Information</th>
-            <th colspan="6">Activity Proper</th>
-            <th colspan="4">Sustainability</th>
             <th></th>
-            <th colspan="3">Other comments</th>
+            <th colspan="7" style="text-align: center;">Basic Information</th>
+            <th colspan="6" style="text-align: center;">Activity Proper</th>
+            <th colspan="4" style="text-align: center;">Sustainability</th>
+            <th></th>
+            <th colspan="3" style="text-align: center;">Other comments</th>
             <th></th>
           </tr>
           <tr>
-            <!--<th></th>-->
-            <th colspan="2">Name</th>
+            <th></th>
+            <th colspan="2" style="text-align: center;">Name</th>
             <!-- <th>Date of Birth</th> -->
-            <th>Age Range</th>
-            <th>Gender</th>
-            <th>Ethnicity</th>
-            <th>City/ Municipality</th>
-            <th>Province</th>
-            <th>Question 1</th>
-            <th>Question 2</th>
-            <th>Question 3</th>
-            <th>Question 4</th>
-            <th>Question 5</th>
-            <th>Question 6</th>
-            <th>Question 7</th>
-            <th>Question 8</th>
-            <th>Question 9</th>
-            <th>Question 10</th>
-            <th>Question 11</th>
-            <th>Question 12</th>
-            <th>Question 13</th>
-            <th>Question 14</th>
-            <th>Question 15</th>
+            <th style="text-align: center;">Age Range</th>
+            <th style="text-align: center;">Gender</th>
+            <th style="text-align: center;">Ethnicity</th>
+            <th style="text-align: center;">City/ Municipality</th>
+            <th style="text-align: center;">Province</th>
+            <th style="text-align: center;">Question 1</th>
+            <th style="text-align: center;">Question 2</th>
+            <th style="text-align: center;">Question 3</th>
+            <th style="text-align: center;">Question 4</th>
+            <th style="text-align: center;">Question 5</th>
+            <th style="text-align: center;">Question 6</th>
+            <th style="text-align: center;">Question 7</th>
+            <th style="text-align: center;">Question 8</th>
+            <th style="text-align: center;">Question 9</th>
+            <th style="text-align: center;">Question 10</th>
+            <th style="text-align: center;">Question 11</th>
+            <th style="text-align: center;">Question 12</th>
+            <th style="text-align: center;">Question 13</th>
+            <th style="text-align: center;">Question 14</th>
+            <th style="text-align: center;">Question 15</th>
           </tr>
       </thead>
       

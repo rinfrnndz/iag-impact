@@ -173,7 +173,6 @@ a {
 
 .tab {
   margin-top: -5px;
-    
 }
 
 .mytabs input[type='radio']:checked + label + .tab {
@@ -192,8 +191,11 @@ a {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shorcut icon" type="image/png" href="favicon-32x32.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-default" style="font-family: calibri; letter-spacing: 1.1px; font-weight: bold;">
@@ -209,8 +211,8 @@ a {
     <div class="collapse navbar-collapse" id="myNavbar" >
       <ul class="nav navbar-nav" >
         <li class="active"><a href="account.php" style="font-size:16px; font-family: Calibri;">❮</a></li>
-        <li><a href="activity.php" style="font-size:16px; font-family: Calibri;">Add Activity</a></li>
-        <li><a href="evaluation-report.php" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>
+        <li><a href="activity" style="font-size:16px; font-family: Calibri;">Add Activity</a></li>
+        <li><a href="evaluation-report" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="logout.php" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -223,7 +225,16 @@ a {
 <div class="container">
   <!--<br/><a href="account.php" class="btn btn-danger">Back</a>-->
   <h3><center>Participants' Information</center></h3>
-   
+  <hr>
+
+  <div style="padding:10px; margin-left: 85%; display: inline-flex; border: 1px solid white; width:auto;">
+    <form action="excel-generator" method="POST" >
+      <!--<input type="text" name="from_date" id="from_date" class="datepicker" placeholder="Date From" style="padding:10px; width: auto;" readonly >
+      <input type="text" name="to_date" id="to_date" class="datepicker" placeholder="Date To" style="padding:10px; width: auto;" readonly > -->
+      <input type="submit" name="export_in_excel" class="btn btn-warning active" style="display:inline; padding:10px;" value="Export as Excel file">
+    </form>
+  </div>
+
   <div class="mytabs">
     <input type="radio" id="tabparticipants" name="mytabs" checked="checked">
     <label for="tabparticipants">Participants</label>
@@ -320,6 +331,31 @@ a {
             }
           ?>
         </div>
+
+        <!-- Script for excel generator //script for datepicker textbox
+        <script type="text/javascript">
+          $(document).ready(function() {
+            $('#from_date').datepicker({
+              dateFormat: 'yy-mm-dd',
+              changeYear: true,
+              onSelect: function(selected) {
+                var dt = new Date(selected);
+                dt.setDate(dt.getDate()+1);
+                $('#to_date').datepicker("option","minDate",dt);
+              }
+            });
+
+            $('#to_date').datepicker({
+              dateFormat: 'yy-mm-dd',
+              changeYear: true,
+              onSelect: function(selected) {
+                var dt = new Date(selected);
+                dt.setDate(dt.getDate()-1);
+                $('#from_date').datepicker("option","maxDate",dt);
+              }
+            });
+          })
+        </script> -->
     </div><!-- div for tab-->
 
     <input type="radio" id="tabsummary" name="mytabs">
