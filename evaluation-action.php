@@ -219,7 +219,13 @@ hr {
           if (isset($_GET['page'])) { $page = $_GET['page']; } else { $page = 1; };
           $this_page_first_result = ($page-1)*$results_per_page;
           
-          $evaluationsql = "SELECT * FROM projectcode projects, activities activity, evaluation eval WHERE activity.id=eval.acty_id AND eval.acty_id='$q' AND projects.projects_id=activity.projects_id AND projects.project_code = '$progamadmin' ORDER BY `timestamp` DESC LIMIT $this_page_first_result, $results_per_page";
+          $evaluationsql = "SELECT *
+                            FROM projectcode prj
+                            INNER JOIN activities act ON  act.projects_id = prj.projects_id
+                            INNER JOIN evaluation e ON act.id = e.acty_id
+                            WHERE prj.project_code = '$progamadmin' AND e.acty_id = '$q'
+                            ORDER BY e.id DESC "; //LIMIT $this_page_first_result, $results_per_page 
+                    
           $evaluationresult = mysqli_query($connect, $evaluationsql);
           $number_of_results = mysqli_num_rows($evaluationresult);
 
@@ -260,19 +266,24 @@ hr {
     </tbody>
      
     </table>
-      <div align= "center">
+  <!--<div align= "center">
         <?php
-          $page_query = "SELECT COUNT(*) FROM projectcode projects, activities activity, evaluation eval WHERE activity.id=eval.acty_id AND eval.acty_id='$q' AND projects.projects_id=activity.projects_id AND projects.project_code = '$progamadmin' ";
+          $page_query = "SELECT COUNT(*) 
+                         FROM projectcode prj
+                         INNER JOIN activities act ON  act.projects_id = prj.projects_id
+                         INNER JOIN evaluation e ON act.id = e.acty_id
+                         WHERE prj.project_code = '$progamadmin' AND e.acty_id = '$q' ";
+          
           $page_result = mysqli_query($connect, $page_query);
           $total_records = mysqli_fetch_array($page_result);
           $total_of_records = $total_records[0];
           $number_of_page = ceil($total_of_records/$results_per_page);
           
           for ($page=1; $page<=$number_of_page; $page++){
-            echo '<a style="padding:7px; background:wheat; border:1px solid gray; color:black;" href="evaluation-report?' .$evaluationrow['acty_id']. '&page=' .$page. ' ">' .$page. '</a>';
+            echo '<a style="padding:7px; background:black; color:white; font-family:Helvetica; border:1px solid gray; border-radius:14px;" href="evaluation-report?' .$q. '&page=' .$page. ' ">' .$page. '</a>';
           }
         ?>
-       </div>
+       </div> -->
   </div> <!-- div for tab -->
 
   <input type="radio" id="tabsummary" name="mytabs">

@@ -71,12 +71,12 @@ hr {
 
     <div class="collapse navbar-collapse" id="myNavbar" >
       <ul class="nav navbar-nav" >
-        <li><a href="account.php" style="font-size:16px; font-family: Calibri;">❮</a></li>
-        <li><a href="activity.php" style="font-size:16px; font-family: Calibri;">Add Activity</a></li>
-        <li class="active"><a href="evaluation-report.php" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>
+        <li><a href="account" style="font-size:16px; font-family: Calibri;">❮</a></li>
+        <li><a href="activity" style="font-size:16px; font-family: Calibri;">Add Activity</a></li>
+        <li class="active"><a href="evaluation-report" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout.php" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a href="logout.php" onClick="return confirm('Are you sure you want to logout?')" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
     </div>
     
@@ -103,13 +103,13 @@ hr {
   }
 </script>
 
-<div style="padding-top:10px; padding-bottom:10px; padding:10px; margin-left:37%; display: inline-flex; border: 1px solid white; width:63%;">
+<div style="padding-top:10px; padding-bottom:10px; padding:10px; margin-left:50%; display: inline-flex; border: 1px solid white; width:auto;">
   <form action="" method="POST" >
     <button class="btn btn-info active" style="display:inline; padding:8.8px;">Generate PDF </button>
   </form>
 &nbsp;&nbsp;
   <form action="" method="POST">
-    <select class="" name="evaluation_list" id="evaluation_list" onchange="showUser(this.value)" style="padding:10.3px; display:inline; display: flex; width: 100%;">
+    <select class="" name="evaluation_list" id="evaluation_list" onchange="showUser(this.value)" style="padding:11px; display:inline; display:flex; width:100%;">
       <option disabled='disabled' selected='selected'>Select Activity Title</option>
       <?php
         $select = mysqli_query($connect, "SELECT * FROM projectcode projects, activities activity, evaluation eval WHERE activity.id=eval.acty_id AND projects.projects_id=activity.projects_id AND projects.project_code = '$progamadmin' GROUP BY eval.acty_id ORDER BY activity.id DESC "); 

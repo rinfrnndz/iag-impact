@@ -210,12 +210,12 @@ a {
 
     <div class="collapse navbar-collapse" id="myNavbar" >
       <ul class="nav navbar-nav" >
-        <li class="active"><a href="account.php" style="font-size:16px; font-family: Calibri;">❮</a></li>
+        <li class="active"><a href="account" style="font-size:16px; font-family: Calibri;">❮</a></li>
         <li><a href="activity" style="font-size:16px; font-family: Calibri;">Add Activity</a></li>
         <li><a href="evaluation-report" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout.php" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a href="logout.php" onClick="return confirm('Are you sure you want to logout?')" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
     </div>
 
@@ -227,12 +227,26 @@ a {
   <h3><center>Participants' Information</center></h3>
   <hr>
 
-  <div style="padding:10px; margin-left: 85%; display: inline-flex; border: 1px solid white; width:auto;">
+  <div style="padding:10px; margin-left: 80%; display: inline-flex; border: 1px solid white; width:auto;">
     <form action="excel-generator" method="POST" >
       <!--<input type="text" name="from_date" id="from_date" class="datepicker" placeholder="Date From" style="padding:10px; width: auto;" readonly >
       <input type="text" name="to_date" id="to_date" class="datepicker" placeholder="Date To" style="padding:10px; width: auto;" readonly > -->
       <input type="submit" name="export_in_excel" class="btn btn-warning active" style="display:inline; padding:10px;" value="Export as Excel file">
     </form>
+    &nbsp;&nbsp;
+    <?php
+      /*$activity_id = $_POST['id'];
+      $for_print_data = mysqli_query($connect, "SELECT * FROM projectcode projects, activities activity, participants respondent WHERE projects.projects_id=activity.projects_id AND projects.project_code = '$programadmin' AND respondent.act_id='$$activity_id' "); //AND p.act_id='$actvtyID'
+      $for_print_rows = mysqli_num_rows($for_print_data);
+      while($print_data_rows=mysqli_fetch_array($for_print_rows)) {
+        $print_data_page = $print_data_rows['act_id'];
+      }*/
+    ?>
+    <form action="" method="POST" >
+      <input type="hidden" name="" value="<?php echo $print_data_page;?> ">
+      <input type="submit" name="print_display" class="btn btn-default active" style="display:inline; padding:10px;" value="Print">
+    </form>
+    
   </div>
 
   <div class="mytabs">
@@ -264,70 +278,58 @@ a {
 
             <?php
               $results_per_page = 10; //number every page
-              //$page = '';
+              $page = '';
               if (isset($_GET['page'])) { $page = $_GET['page']; } else { $page = 1; };
               $this_page_first_result = ($page-1)*$results_per_page;
 
-              $qryforthreetables = "SELECT * FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' ORDER BY p.id ASC LIMIT $this_page_first_result, $results_per_page ";
-              //SELECT * FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' GROUP BY p.id
+              $qryforthreetables = " SELECT * FROM projectcode pc INNER JOIN activities a ON a.projects_id = pc.projects_id INNER JOIN participants p ON p.act_id = a.id WHERE pc.project_code = '$programadmin' && p.act_id = '$actvtyID' ORDER BY p.id ASC LIMIT $this_page_first_result, $results_per_page ";
               $qrytoshowparticipants = mysqli_query($connect, $qryforthreetables);
               $number_of_results = mysqli_num_rows($qrytoshowparticipants);
               
               $no = 1;
-              while ($participants = mysqli_fetch_array($qrytoshowparticipants)) {
-                $participants_fname = $participants['firstname'];
-                $participants_lname = $participants['lastname'];
-                $participants_age = $participants['agerange'];
-                $participants_gender = $participants['gender'];
-                $participants_ethnic = $participants['ethnicity'];
-                $participants_c_m = $participants['city_municipality'];
-                $participants_province = $participants['province'];
-                $participants_mobile_no = $participants['mobileno'];
-                $participants_email = $participants['email'];
-                $participants_education = $participants['education'];
-                $participants_others = $participants['othereduc'];
-                $participants_office = $participants['org_office'];
-                $participants_position = $participants['position'];
-                $participants_office_no = $participants['org_no'];
-                $participants_office_email = $participants['org_email'];
+              while ($participants = mysqli_fetch_assoc($qrytoshowparticipants)) {
+              
             ?>
               <tr>
                 <td><?php echo $no;?></td>
-                <td><?php echo ucfirst($participants_fname);?></td>
-                <td><?php echo ucfirst($participants_lname);?></td>
+                <td><?php echo ucfirst($participants['firstname']);?></td>
+                <td><?php echo ucfirst($participants['lastname']);?></td>
                 <!--<td><?php echo $participants['birthdate'];?></td>-->
-                <td><?php echo $participants_age;?></td>
-                <td><?php echo $participants_gender;?></td>
-                <td><?php echo ucfirst($participants_ethnic);?></td>
-                <td><?php echo ucfirst($participants_c_m);?></td>
-                <td><?php echo ucfirst($participants_province);?></td>
-                <td><?php echo $participants_mobile_no;?></td>
-                <td><?php echo $participants_email;?></td>
-                <td><?php echo ucfirst($participants_education);?></td>
-                <td><?php echo ucfirst($participants_others);?></td>
-                <td><?php echo ucfirst($participants_office);?></td>
-                <td><?php echo ucfirst($participants_position);?></td>
-                <td><?php echo $participants_office_no;?></td>
-                <td><?php echo $participants_office_email;?></td>
+                <td><?php echo $participants['agerange'];?></td>
+                <td><?php echo $participants['gender'];?></td>
+                <td><?php echo ucfirst($participants['ethnicity']);?></td>
+                <td><?php echo ucfirst($participants['city_municipality']);?></td>
+                <td><?php echo ucfirst($participants['province']);?></td>
+                <td><?php echo $participants['mobileno'];?></td>
+                <td><?php echo $participants['email'];?></td>
+                <td><?php echo ucfirst($participants['education']);?></td>
+                <td><?php echo ucfirst($participants['othereduc']);?></td>
+                <td><?php echo ucfirst($participants['org_office']);?></td>
+                <td><?php echo ucfirst($participants['position']);?></td>
+                <td><?php echo $participants['org_no'];?></td>
+                <td><?php echo $participants['org_email'];?></td>
               </tr>
-            
-          </tbody>
-          <?php
+            </tbody>
+            <?php
                 $no ++;
               }
-             
-            ?>
+              ?>
       </table><br/>
         <div align= "center" >
           <?php
-            $page_query = "SELECT COUNT(*) FROM projectcode projcode, activities acty, participants p WHERE p.act_id='$actvtyID' AND projcode.projects_id=acty.projects_id AND projcode.project_code='$programadmin' ORDER BY acty.id";
+            $page_query = "SELECT COUNT(*) FROM projectcode pr
+                            INNER JOIN activities ac ON ac.projects_id = pr.projects_id
+                            INNER JOIN participants pa ON pa.act_id = ac.id
+                            WHERE pa.act_id = '$actvtyID' && pr.project_code = '$programadmin'
+                            ORDER BY pa.id DESC ";
+          
             $page_result = mysqli_query($connect, $page_query);
             $total_records = mysqli_fetch_array($page_result);
             $total_of_records = $total_records[0];
             $number_of_page = ceil($total_of_records/$results_per_page);
             
             for ($page=1; $page<=$number_of_page; $page++){
-              echo '<a style="padding:8px; background:black; border-radius:11px; margin: 0 2px; color:white; font-family: Arial;" href="display?id=' .$actvtyID. '&page=' .$page. ' ">' .$page. '</a>';
+              echo '<a style="padding:10px; background:black; border-radius:14px; margin: 0 2px; color:white; font-family: Arial;" href="display?id=' .$actvtyID. '&page=' .$page. ' ">' .$page. '</a>';
             }
           ?>
         </div>
