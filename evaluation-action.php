@@ -14,29 +14,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin-Evaluation Report</title>
-<style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  /*background-color: white;*/
-  background-image: url("iag.jpg");
-  height: 1000px; /* You must set a specified height */
-  min-height: 100vh;
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
-  display: flex;
-  flex-direction: column;
-}
+<title>Admin-Participants Page</title>
 
+<style>
 * {
   box-sizing: border-box;
+  background-color: white;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  background-color: white;
+  /*background-image: url("iag.jpg");*/
+  /*height: 1000px; /* You must set a specified height */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Overwrite default styles of hr */
 hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
 }
 
 .card {
@@ -120,63 +124,75 @@ hr {
   color: white;  
 }
 
-.mytabs {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  margin: 15px auto;
-  padding: 20px;
-  background-color: #F5F5F5;
+/* Style the tab */
+.tab {
+  float: left;
+  border: 0px solid #fff;
+  background-color: #E5E4E2;
+  width: 15%;
+  /*height: 300px;*/
   
 }
 
-.mytabs input[type="radio"] {
-  display: none;
-}
-
-.mytabs label {
-  padding: 10px;
-  background-color: #F5F5F5;
-  font-weight: semibold;
-  font-size: 12px;
-}
-
-.mytabs .tab {
-  width: 100%;
-  padding: 15px;
-  background-color: white;
-  order: 1;
-  display: none;
-  border: 1px grey;
-}
-
-.tab {
-  margin-top: -5px;
-}
-
-.mytabs input[type='radio']:checked + label + .tab {
+/* Style the buttons inside the tab */
+.tab button {
   display: block;
+  background-color: inherit;
+  color: #36454F;
+  padding: 16px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  letter-spacing: 2px;
+  font-family:;
 }
 
-.mytabs input[type='radio']:checked + label {
-  background-color: white;
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
 }
 
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: #fff;
+  color: #71797E;
+  font-weight: bold;
+}
+
+/* Style the tab content */
+.tabcontent {
+  float: left;
+  padding: 10px 10px;
+  border: 1px solid #fff;
+  width: 85%;
+  border-left: none;
+  /*height: 300px;*/
+  background: white;
+  display: none;
+}
 </style>
 <script type="text/javasript" src="jquery-3.6.0.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shorcut icon" type="image/png" href="favicon-32x32.png">
 </head>
+
 <body>
 
-<div class="mytabs">
-  <input type="radio" id="tabparticipants" name="mytabs" checked="checked">
-  <label for="tabparticipants">Respondents</label>
-  <div class="tab">
-    <h3>Respondents</h3><hr>
-    <table class="table">
-      <thead >
-          <tr>
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Participants')" id="defaultOpen">Respondents</button>
+  <button class="tablinks" onclick="openCity(event, 'Summary')">Summary</button>
+  <button class="tablinks" onclick="openCity(event, 'Chart')">Chart</button>
+</div>
+
+<div id="Participants" class="tabcontent">
+  
+  <table class="table">
+    <thead >
+        <tr>
             <th></th>
             <th colspan="7" style="text-align: center;">Basic Information</th>
             <th colspan="6" style="text-align: center;">Activity Proper</th>
@@ -184,8 +200,8 @@ hr {
             <th></th>
             <th colspan="3" style="text-align: center;">Other comments</th>
             <th></th>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
             <th></th>
             <th colspan="2" style="text-align: center;">Name</th>
             <!-- <th>Date of Birth</th> -->
@@ -209,30 +225,30 @@ hr {
             <th style="text-align: center;">Question 13</th>
             <th style="text-align: center;">Question 14</th>
             <th style="text-align: center;">Question 15</th>
-          </tr>
-      </thead>
+        </tr>
+    </thead>
       
-      <tbody>
-        <?php
-          $results_per_page = 5; //number every page
-          $page = '';
-          if (isset($_GET['page'])) { $page = $_GET['page']; } else { $page = 1; };
-          $this_page_first_result = ($page-1)*$results_per_page;
+    <tbody>
+    <?php
+        $results_per_page = 5; //number every page
+        $page = '';
+        if (isset($_GET['page'])) { $page = $_GET['page']; } else { $page = 1; };
+        $this_page_first_result = ($page-1)*$results_per_page;
           
-          $evaluationsql = "SELECT *
-                            FROM projectcode prj
-                            INNER JOIN activities act ON  act.projects_id = prj.projects_id
-                            INNER JOIN evaluation e ON act.id = e.acty_id
-                            WHERE prj.project_code = '$progamadmin' AND e.acty_id = '$q'
-                            ORDER BY e.id DESC "; //LIMIT $this_page_first_result, $results_per_page 
+        $evaluationsql = "SELECT *
+                          FROM projectcode prj
+                          INNER JOIN activities act ON  act.projects_id = prj.projects_id
+                          INNER JOIN evaluation e ON act.id = e.acty_id
+                          WHERE prj.project_code = '$progamadmin' AND e.acty_id = '$q'
+                          ORDER BY e.id DESC "; //LIMIT $this_page_first_result, $results_per_page 
                     
-          $evaluationresult = mysqli_query($connect, $evaluationsql);
-          $number_of_results = mysqli_num_rows($evaluationresult);
+        $evaluationresult = mysqli_query($connect, $evaluationsql);
+        $number_of_results = mysqli_num_rows($evaluationresult);
 
-          $no = 1;
-          while($evaluationrow=mysqli_fetch_array($evaluationresult)) {
+        $no = 1;
+        while($evaluationrow=mysqli_fetch_array($evaluationresult)) {
           
-        ?>
+    ?>
         <tr>
           <td data-label=""><?php echo $no;?></td>
           <td data-label=""><?php echo ucfirst($evaluationrow['first_name']);?></td>
@@ -259,38 +275,36 @@ hr {
           <td style="text-transform: normal; text-align: left;"><?php echo ($evaluationrow['q14']);?></td>
           <td><?php echo ($evaluationrow['q15']);?></td>
         <?php
-            $no++;
-          }
+                $no++;
+            }
         ?>
-      </tr>
+        </tr>
     </tbody>
      
-    </table>
+  </table>
   <!--<div align= "center">
-        <?php
-          $page_query = "SELECT COUNT(*) 
-                         FROM projectcode prj
-                         INNER JOIN activities act ON  act.projects_id = prj.projects_id
-                         INNER JOIN evaluation e ON act.id = e.acty_id
-                         WHERE prj.project_code = '$progamadmin' AND e.acty_id = '$q' ";
+    <?php
+       $page_query = "SELECT COUNT(*) 
+                      FROM projectcode prj
+                      INNER JOIN activities act ON  act.projects_id = prj.projects_id
+                      INNER JOIN evaluation e ON act.id = e.acty_id
+                      WHERE prj.project_code = '$progamadmin' AND e.acty_id = '$q' ";
           
-          $page_result = mysqli_query($connect, $page_query);
-          $total_records = mysqli_fetch_array($page_result);
-          $total_of_records = $total_records[0];
-          $number_of_page = ceil($total_of_records/$results_per_page);
-          
-          for ($page=1; $page<=$number_of_page; $page++){
-            echo '<a style="padding:7px; background:black; color:white; font-family:Helvetica; border:1px solid gray; border-radius:14px;" href="evaluation-report?' .$q. '&page=' .$page. ' ">' .$page. '</a>';
-          }
-        ?>
-       </div> -->
-  </div> <!-- div for tab -->
+        $page_result = mysqli_query($connect, $page_query);
+        $total_records = mysqli_fetch_array($page_result);
+        $total_of_records = $total_records[0];
+        $number_of_page = ceil($total_of_records/$results_per_page);
+         
+        for ($page=1; $page<=$number_of_page; $page++){
+           echo '<a style="padding:7px; background:black; color:white; font-family:Helvetica; border:1px solid gray; border-radius:14px;" href="evaluation-report?' .$q. '&page=' .$page. ' ">' .$page. '</a>';
+        }
+    ?>
+    </div> -->
+</div> <!-- end div for Respondents-->
 
-  <input type="radio" id="tabsummary" name="mytabs">
-  <label for="tabsummary">Summary</label>
-  <div class="tab">
-    <h3>Summary</h3><hr>
-      <div class="cards">
+<div id="Summary" class="tabcontent">
+  
+  <div class="cards">
         <div class="card2"><!-- PARTICIPANTS COUNT -->
         <?php //For total number of Participants for selected Evaluation
           $e_count = "SELECT COUNT(*) AS totalcount FROM evaluation WHERE acty_id='$q' ";
@@ -1041,18 +1055,13 @@ hr {
         </table> <!-- table for each question 15 counts-->
       </div> <!-- div for each question 15 counts-->
     </div> <!-- end of div cards-->
-      
-      
-  </div> <!-- div for tab -->
+</div> <!-- end div for Summary-->
 
-  <input type="radio" id="tabcharts" name="mytabs">
-  <label for="tabcharts">Charts</label>
-  <div class="tab">
-    <h3>Charts</h3><hr>
-    Still on progress....
-  </div> <!-- div for tab -->
+<div id="Chart" class="tabcontent">
+  
+  <p>Still in progress.</p>
+</div> <!-- end div for Chart-->
 
-</div> <!-- div for mytab -->
 
 </body>
 </html>

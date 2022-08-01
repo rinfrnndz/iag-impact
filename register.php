@@ -16,7 +16,7 @@
 
 <style>
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Helvetica, sans-serif;
   /*background-image: url("iag.jpg");*/
   background-color: white;
   /*height: 1000px;  You must set a specified height */
@@ -178,7 +178,7 @@ p {
 </style>
 </head>
 <body>
-<nav class="navbar navbar-default" style="font-family: Calibri; letter-spacing: 1.1px; font-weight: bold;">
+<nav class="navbar navbar-default" style="font-family: Calibri; font-size: 15px; letter-spacing: 1.1px; font-weight: bold;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
@@ -189,13 +189,13 @@ p {
             </div>
             <div class="collapse navbar-collapse" id="myNavbar" >
             <ul class="nav navbar-nav" >
-                <li><a href="index" style="font-size:16px; font-family: Calibri;">Home</a></li>
+                <li><a href="index"">Home</a></li>
                 
-                <li class="active"><a href="register" style="font-size:16px; font-family: Calibri;">Registration Form</a></li>
+                <li class="active"><a href="register" ">Registration Form</a></li>
                 <li style="font-size:16px; font-family: Calibri;"><a href="evaluation-form">Evaluation Form</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="login" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="login" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
             </div>
         </div>
@@ -222,23 +222,23 @@ p {
 <form action="" method="POST">
   <div class="container">
   <?php
-    $acttitle = $_POST['activity_title'];
-    $namef = $_POST['fname'];
-    $namel = $_POST['lname'];
-    //$birthday = $_POST['dob'];
-    $age = $_POST['age_range'];
-    $sex = $_POST['sgender'];
-    $ethnici = $_POST['ethnic'];
-    $ct = $_POST['city_municipality'];
-    $prvince = $_POST['prov'];
-    $mobile = $_POST['phoneno'];
-    $emailad = $_POST['eadd'];
-    $attainment = $_POST['educ'];
-    $othereducation = $_POST['othereducation'];
-    $org = $_POST['office'];
-    $postion = $_POST['post'];
-    $orgmobile = $_POST['officeno'];
-    $orgemail = $_POST['office_email'];
+    $acttitle = mysqli_real_escape_string($connect, $_POST['activity_title']);
+    $namef = mysqli_real_escape_string($connect, $_POST['fname']);
+    $namel = mysqli_real_escape_string($connect, $_POST['lname']);
+    //$birthday = mysqli_real_escape_string($connect, $_POST['dob']);
+    $age = mysqli_real_escape_string($connect, $_POST['age_range']);
+    $sex = mysqli_real_escape_string($connect, $_POST['sgender']);
+    $ethnici = mysqli_real_escape_string($connect, $_POST['ethnic']);
+    $ct = mysqli_real_escape_string($connect, $_POST['city_municipality']);
+    $prvince = mysqli_real_escape_string($connect, $_POST['prov']);
+    $mobile = mysqli_real_escape_string($connect, $_POST['phoneno']);
+    $emailad = mysqli_real_escape_string($connect, $_POST['eadd']);
+    $attainment = mysqli_real_escape_string($connect, $_POST['educ']);
+    $othereducation = mysqli_real_escape_string($connect, $_POST['othereducation']);
+    $org = mysqli_real_escape_string($connect, $_POST['office']);
+    $postion = mysqli_real_escape_string($connect, $_POST['post']);
+    $orgmobile = mysqli_real_escape_string($connect, $_POST['officeno']);
+    $orgemail = mysqli_real_escape_string($connect, $_POST['office_email']);
 
     if(isset($_POST['submit'])) {
       $participant_duplicate = mysqli_query($connect, "SELECT act_id, firstname, lastname, agerange, gender, ethnicity  FROM `participants` WHERE  act_id='$acttitle' && firstname='$namef' && lastname='$namel' && agerange='$age' && gender='$sex' && ethnicity='$ethnici' ");
@@ -249,7 +249,7 @@ p {
         $register_sql = "INSERT INTO participants (act_id, firstname, lastname, agerange, gender, ethnicity, city_municipality, province, mobileno, email, education, othereduc, org_office, position, org_no, org_email)
                           VALUES ('$acttitle','$namef','$namel','$age','$sex','$ethnici','$ct','$prvince','$mobile','$emailad','$attainment','$othereducation','$org','$postion','$orgmobile','$orgemail')";
         $register = mysqli_query($connect, $register_sql); 
-        echo "<div class='alert alert-warning' style='width:100%; margin-left:auto; margin-right:auto;'><strong>Thank you!</strong>&nbsp;You are now registered to this activity.</div>";
+        echo "<div class='alert alert-warning' style='width:100%; margin-left:auto; margin-right:auto;'><strong>Thank you!</strong>&nbsp;You are now registered.</div>";
       }
     }
   ?>
@@ -285,7 +285,7 @@ p {
     <br>
     <label for="age"><b>Age Range</b></label>
       <select name="age_range" id="age_range" >
-        <option disabled="disabled" selected="selected">--Select Age Range--</option>
+        <option disabled="disabled" selected="selected">Select Age Range</option>
         <option>15 - 25</option>
         <option>26 - 35</option>
         <option>36 - 45</option>
@@ -296,7 +296,7 @@ p {
     
     <label for="gender"><b>Gender</b></label>
       <select name="sgender" id="gender" required>
-        <option disabled="disabled" selected="selected">--Select Gender--</option>
+        <option disabled="disabled" selected="selected">Select Gender</option>
         <option>Male</option>
         <option>Female</option>
       </select>
@@ -318,7 +318,7 @@ p {
     
     <label for="education"><b>Educational Attainment</b></label>
       <select class="form-input" name="educ" id="educ" onchange='CheckColors(this.value);' required>
-        <option disabled="disabled" selected="selected">--Choose Option--</option>
+        <option disabled="disabled" selected="selected">Select Educational Attainment</option>
         <option>Bachelors/Baccalaureate Degree</option>
         <option>Graduate Degree (Masters Degree)</option>
         <option>Post Graduate (PhD, EdD)</option>

@@ -16,7 +16,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Program Admin Page</title>
+<title>Admin Page</title>
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -41,7 +41,7 @@ body {
   background-color: white;
   box-shadow: 5px 10px 20px grey;
   border-radius: 12px;
-  width: 80%;
+  
 }
 
 /* Overwrite default styles of hr */
@@ -101,7 +101,7 @@ a {
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default" style="font-family: calibri; letter-spacing: 1.1px; font-weight: bold;">
+<nav class="navbar navbar-default" style="font-family: Calibri; letter-spacing: 1.1px; font-weight: bold; font-size:15px;">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
@@ -113,19 +113,19 @@ a {
 
     <div class="collapse navbar-collapse" id="myNavbar" >
       <ul class="nav navbar-nav" >
-        <li class="active"><a href="account.php" style="font-size:16px; font-family: Calibri;">Main</a></li>
-        <li><a href="activity" style="font-size:16px; font-family: Calibri;">Add Activity</a></li>
-        <li><a href="evaluation-report" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>
+        <li class="active"><a href="account" >Main</a></li>
+        <li><a href="activity" >Add Activity</a></li>
+        <li><a href="evaluation-report">Evaluation Report</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout" onClick="return confirm('Are you sure you want to logout?')" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a href="logout.php" onClick="return confirm('Are you sure you want to logout?')"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
     </div>
     
   </div>
 </nav>
 
-  <div class="container">
+  <div class="container" style="width: 90%; border: 0px solid grey;">
     <?php echo "<h2><center>" .$_SESSION['username']. " Report</h1>"; ?></h2>
     <hr>
     <h4>Lists of Activities Conducted</h4><br/>

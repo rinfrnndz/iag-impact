@@ -13,30 +13,19 @@
 <head>
 <title>Admin-Evaluation Report</title>
 <style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  /*background-color: white;*/
-  background-image: url("iag.jpg");
-  height: 1000px; /* You must set a specified height */
-  min-height: 100vh;
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
-  display: flex;
-  flex-direction: column;
-}
-
 * {
   box-sizing: border-box;
+  background-color: white;
 }
 
-/* Add padding to containers */
-.container {
-  padding: 30px;
+body {
+  font-family: "Lato", sans-serif;
   background-color: white;
-  box-shadow: 5px 10px 20px grey;
-  border-radius: 12px;
-
+  /*background-image: url("iag.jpg");*/
+  /*height: 1000px; /* You must set a specified height */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Overwrite default styles of hr */
@@ -49,6 +38,7 @@ hr {
   background-color: #f1f1f1;
   color: black;
 }
+
 </style>
 <script type="text/javasript" src="jquery-3.6.0.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -83,7 +73,7 @@ hr {
   </div>
 </nav>
 
-<div class="container">
+<div class="container" style="width: 99%; border: 1px solid white; padding-bottom:10px;">
 <?php echo "<h2><center>" .$_SESSION['username']. " Evaluation Report</center></h2>"; ?>
 <hr><br/>
 <script>
@@ -102,7 +92,6 @@ hr {
     xmlhttp.send();
   }
 </script>
-
 <div style="padding-top:10px; padding-bottom:10px; padding:10px; margin-left:50%; display: inline-flex; border: 1px solid white; width:auto;">
   <form action="" method="POST" >
     <button class="btn btn-info active" style="display:inline; padding:8.8px;">Generate PDF </button>
@@ -125,5 +114,24 @@ hr {
 <br>
 <div id="evaluation_data"><b>Evaluation Report will be displayed here....</b></div>
 
+<br>
+<script>
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+</script>
 </body>
 </html>

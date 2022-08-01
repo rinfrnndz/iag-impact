@@ -135,7 +135,7 @@ p {
 }
 
 th {
-    text-align: center;
+  text-align: center;
 }
 
 .rating {
@@ -259,30 +259,30 @@ th {
 <div class="container">
   <?php
     if(isset($_POST['submit'])) {
-      $actvtytitle =  $_POST['activity']; //mysqli_real_escape_string($connect,
-        $firstname = $_POST['fname']; //mysqli_real_escape_string($connect,);
-        $lastname = $_POST['lname']; //mysqli_real_escape_string($connect,);
-        //$dob = $_POST['birthdate']; //mysqli_real_escape_string($connect,);
-        $agerange = $_POST['age_range']; //mysqli_real_escape_string($connect,);
-        $sgender = $_POST['sgender']; //mysqli_real_escape_string($connect,);
-        $ethncty = $_POST['ethnic']; //mysqli_real_escape_string($connect,);
-        $ctm = $_POST['ctm'];
-        $province = $_POST['province'];
-        $ques1 = $_POST['ques1'];
-        $ques2 = $_POST['ques2'];
-        $ques3 = $_POST['ques3'];
-        $ques4 = $_POST['ques4'];
-        $ques5 = $_POST['ques5'];
-        $ques6 = $_POST['ques6'];
-        $ques7 = $_POST['ques7'];
-        $ques8 = $_POST['ques8'];
-        $ques9 = $_POST['ques9'];
-        $ques10 = $_POST['ques10'];
-        $ques11 = $_POST['ques11'];
-        $ques12 = $_POST['ques12'];
-        $ques13 = $_POST['ques13'];
-        $ques14 = $_POST['ques14'];
-        $ques15 = $_POST['ques15'];
+      $actvtytitle =  mysqli_real_escape_string($connect, $_POST['activity']);
+        $firstname = mysqli_real_escape_string($connect, $_POST['fname']);
+        $lastname = mysqli_real_escape_string($connect, $_POST['lname']);
+        //$dob = mysqli_real_escape_string($connect, $_POST['birthdate']);
+        $agerange = mysqli_real_escape_string($connect, $_POST['age_range']);
+        $sgender = mysqli_real_escape_string($connect, $_POST['sgender']);
+        $ethncty = mysqli_real_escape_string($connect, $_POST['ethnic']);
+        $ctm = mysqli_real_escape_string($connect, $_POST['ctm']);
+        $province = mysqli_real_escape_string($connect, $_POST['province']);
+        $ques1 = mysqli_real_escape_string($connect, $_POST['ques1']);
+        $ques2 = mysqli_real_escape_string($connect, $_POST['ques2']);
+        $ques3 = mysqli_real_escape_string($connect, $_POST['ques3']);
+        $ques4 = mysqli_real_escape_string($connect, $_POST['ques4']);
+        $ques5 = mysqli_real_escape_string($connect, $_POST['ques5']);
+        $ques6 = mysqli_real_escape_string($connect, $_POST['ques6']);
+        $ques7 = mysqli_real_escape_string($connect, $_POST['ques7']);
+        $ques8 = mysqli_real_escape_string($connect, $_POST['ques8']);
+        $ques9 = mysqli_real_escape_string($connect, $_POST['ques9']);
+        $ques10 = mysqli_real_escape_string($connect, $_POST['ques10']);
+        $ques11 = mysqli_real_escape_string($connect, $_POST['ques11']);
+        $ques12 = mysqli_real_escape_string($connect, $_POST['ques12']);
+        $ques13 = mysqli_real_escape_string($connect, $_POST['ques13']);
+        $ques14 = mysqli_real_escape_string($connect, $_POST['ques14']);
+        $ques15 = mysqli_real_escape_string($connect, $_POST['ques15']);
   
           /*$insertforeval = "INSERT INTO evaluation (`acty_id`, `first_name`, `last_name`, `birthday`, `age_range`, `gender`, `ethnicity`, `ct_municipality`, `provnce`, `q1`, `q2`, `q3`, `q4`, `q5`, `q6`, `q7`, `q8`, `q9`, `q10`, `q11`, `q12`, `q13`, `q14`, `q15`) 
           VALUES ('$actvtytitle','$firstname','$lastname','$dob','$agerange','$sgender','$ethncty','$ctm','$province','$ques1','$ques2','$ques3','$ques4','$ques5','$ques6','$ques7','$ques8','$ques9','$ques10','$ques11','$ques12','$ques13','$ques14','$ques15')";*/
@@ -330,7 +330,7 @@ th {
     <br>
     <label for="age"><b>Age Range</b></label>
       <select name="age_range" id="age_range" >
-        <option disabled="disabled" selected="selected">--Select Age Range--</option>
+        <option disabled="disabled" selected="selected">Select Age Range</option>
         <option>15 - 25</option>
         <option>26 - 35</option>
         <option>36 - 45</option>
@@ -341,7 +341,7 @@ th {
     
     <label for="gender"><b>Gender</b></label>
       <select name="sgender" id="sgender" required>
-        <option disabled="disabled" selected="selected">--Select Gender--</option>
+        <option disabled="disabled" selected="selected">Select Gender</option>
         <option>Male</option>
         <option>Female</option>
       </select>
