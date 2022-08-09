@@ -142,7 +142,7 @@ a {
 </head>
 <body>
 
-<nav class="navbar navbar-default" style="font-family: Calibri; letter-spacing: 1.1px; font-weight: bold; font-size:16px;">
+<nav class="navbar navbar-default" style="font-family: Calibri; letter-spacing: 0.6px; font-weight: bold; font-size:15.8px;">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
@@ -154,8 +154,7 @@ a {
     <div class="collapse navbar-collapse" id="myNavbar" >
       <ul class="nav navbar-nav" >
         <li><a href="index">Home</a></li>
-               
-        <li><a href="register">Registration Form</a></li>
+        <li><a href="registration">Registration Form</a></li>
         <li><a href="evaluation-form">Evaluation Form</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

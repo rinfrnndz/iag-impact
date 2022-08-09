@@ -158,9 +158,9 @@ a {
 
     <div class="collapse navbar-collapse" id="myNavbar" >
       <ul class="nav navbar-nav" >
-        <li><a href="account" style="font-size:16px; font-family: Calibri;">❮</a></li>
-        <li class="active"><a href="activity" style="font-size:16px; font-family: Calibri;">Add Activity</a></li>
-        <li><a href="evaluation-report" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>
+        <li class="active"><a href="account" >❮</a></li>
+        <li><a href="activity" >Add Activity</a></li>
+        <!--<li><a href="evaluation-report" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>-->
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="logout.php"  onClick="return confirm('Are you sure you want to logout?')" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

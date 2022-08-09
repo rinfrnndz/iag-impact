@@ -178,8 +178,6 @@ a {
   background: white;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
-
 </style>
 <script type="text/javasript" src="jquery-3.6.0.js"></script>
     <meta charset="utf-8">
@@ -193,20 +191,20 @@ a {
 
 </head>
 <body>
-<nav class="navbar navbar-default" style="font-family: calibri; letter-spacing: 1.1px; font-weight: bold;">
+<nav class="navbar navbar-default" style="font-family: calibri; letter-spacing: 1.1px; font-weight: bold; font-size:15px">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
+        <span class="icon-bar"></span>
       </button>
     </div>
 
     <div class="collapse navbar-collapse" id="myNavbar" >
       <ul class="nav navbar-nav" >
-        <li class="active"><a href="account" style="font-size:16px; font-family: Calibri;">❮</a></li>
-        <li><a href="activity" style="font-size:16px; font-family: Calibri;">Add Activity</a></li>
+        <li class="active"><a href="account" >❮</a></li>
+        <li><a href="activity" >Add Activity</a></li>
         <li><a href="evaluation-report" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -222,6 +220,14 @@ a {
     <h3><center>Participants' Information</center></h3>
   <hr>
 
+  <form action="" method="GET">
+    <div style="background-color:black; width:50%; padding:10px;">
+      <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>" class="form-control" placeholder="Search data" style="width:100%; padding:10px;">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+
+<hr>
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'Participants')" id="defaultOpen">Participants</button>
   <button class="tablinks" onclick="openCity(event, 'Summary')">Summary</button>
@@ -230,7 +236,7 @@ a {
 
 <div id="Participants" class="tabcontent">
   <h3>Participants</h3>
-  <div style="padding:10px; margin-left: 85%; border: 1px solid white; margin-top:-55px;">
+  <div style="padding:10px; margin-left: 85%; border: 1px solid black; margin-top:-55px;">
     <form action="excel-generator" method="POST" >
       <input type="submit" name="export_in_excel" class="btn btn-warning active" style="display:inline; padding:10px;" value="Export as Excel file">
     </form>
@@ -262,7 +268,17 @@ a {
         $page = '';
         if (isset($_GET['page'])) { $page = $_GET['page']; } else { $page = 1; };
           $this_page_first_result = ($page-1)*$results_per_page;
-          $qryforthreetables = " SELECT * FROM projectcode pc INNER JOIN activities a ON a.projects_id = pc.projects_id INNER JOIN participants p ON p.act_id = a.id WHERE pc.project_code = '$programadmin' && p.act_id = '$actvtyID' ORDER BY p.id ASC LIMIT $this_page_first_result, $results_per_page ";
+
+          /*if (isset($_GET['search'])) {
+            $search_for_participants = $_GET['search'];
+            
+          }*/
+          $qryforthreetables = " SELECT * FROM projectcode pc 
+                                 INNER JOIN activities a ON a.projects_id = pc.projects_id 
+                                 INNER JOIN participants p ON p.act_id = a.id 
+                                 WHERE pc.project_code = '$programadmin' && p.act_id = '$actvtyID' 
+                                 ORDER BY p.id DESC 
+                                 LIMIT $this_page_first_result, $results_per_page ";
           $qrytoshowparticipants = mysqli_query($connect, $qryforthreetables);
           $number_of_results = mysqli_num_rows($qrytoshowparticipants);
             

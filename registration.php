@@ -17,6 +17,7 @@
 <style>
 body {
   font-family: Helvetica, sans-serif;
+  letter-spacing: 0.5px;
   /*background-image: url("iag.jpg");*/
   background-color: white;
   /*height: 1000px;  You must set a specified height */
@@ -36,11 +37,11 @@ img {
 
 /* Add padding to containers */
 .container {
-  padding: 50px;
+  padding: 25px;
   background-color: white;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 75%;
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
   background: rgba(255,255,255,1);
@@ -178,7 +179,7 @@ p {
 </style>
 </head>
 <body>
-<nav class="navbar navbar-default" style="font-family: Calibri; font-size: 15px; letter-spacing: 1.1px; font-weight: bold;">
+<nav class="navbar navbar-default" style="font-family: Calibri; letter-spacing: 0.6px; font-weight: bold; font-size:15.8px;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
@@ -190,9 +191,8 @@ p {
             <div class="collapse navbar-collapse" id="myNavbar" >
             <ul class="nav navbar-nav" >
                 <li><a href="index"">Home</a></li>
-                
-                <li class="active"><a href="register" ">Registration Form</a></li>
-                <li style="font-size:16px; font-family: Calibri;"><a href="evaluation-form">Evaluation Form</a></li>
+                <li class="active"><a href="registration">Registration Form</a></li>
+                <li><a href="evaluation-form">Evaluation Form</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="login" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -201,6 +201,7 @@ p {
         </div>
 </nav>
 
+<!-- script for GO TO TOP button -->
 <button onClick="topFunction()" id="myBtn" title="Go to top">Go to top</button>
 <script>
   window.onscroll = function() {scrollFunction()};
@@ -296,13 +297,26 @@ p {
     
     <label for="gender"><b>Gender</b></label>
       <select name="sgender" id="gender" required>
-        <option disabled="disabled" selected="selected">Select Gender</option>
+        <!--<option disabled="disabled" selected="selected">Select Gender</option>
         <option>Male</option>
-        <option>Female</option>
+        <option>Female</option>-->
+        <option disabled="disabled" selected="selected">Select Gender</option>
+        <optgroup label="Gender">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </optgroup>
+        <optgroup label="Others:">
+          <option value="L">L</option>
+          <option value="G">G</option>
+          <option value="B">B</option>
+          <option value="T">T</option>
+          <option value="Q">Q</option>
+          <option value="A">A</option>
+        </optgroup>
       </select>
-
+      
     <label for="ethnic"><b>Ethnicity</b></label>
-    <input type="text" placeholder="Enter your Ethnicity" name="ethnic" id="ethnic" required>
+    <input type="text" placeholder="Enter your Ethnicity (ex. Tagalog, Cebuano, Ilocano, Bicolano, Kapampangan, Meranao, Maguindanaon, Tausug and Ilokano)" name="ethnic" id="ethnic" required>
     
     <label for="city_municipality"><b>City/Municipality</b></label>
     <input type="text" placeholder="Enter your City/Municipality" name="city_municipality" id="city_municipality" required>
@@ -314,7 +328,7 @@ p {
     <input type="text" placeholder="09xxxxxxx" name="phoneno" id="phoneno" required>
     
     <label for="eadd"><b>Email Address</b></label>
-    <input type="email" placeholder="example@email.com" name="eadd" id="eadd" required>
+    <input type="text" placeholder="example@email.com (if none simply put NA)" name="eadd" id="eadd" required>
     
     <label for="education"><b>Educational Attainment</b></label>
       <select class="form-input" name="educ" id="educ" onchange='CheckColors(this.value);' required>
@@ -350,9 +364,12 @@ p {
     <input type="text" placeholder="Enter Organization Email Address., if none simply put NA" name="office_email" id="office_email" required>
     
     <div style="width: 90%; margin-left:auto; margin-right:auto;">
-      <p style="text-align:justify;  ">Thank you for participating in this event. By filling-up this form, you consent IAG to collect and process your personal information. The information collected by the Institute for Autonomy and Governance (IAG) is stored and processed for internal and donor monitoring purposes. We take our responsibilities for protecting your data very seriously. Details of how your personal information is processed, is in accordance with the requirements of the Data Privacy Act of 2012.</p>
+      <p style="text-align:justify;">Thank you for participating in this event. By filling-up this form, you consent IAG to collect and process your personal information. The information collected by the Institute for Autonomy and Governance (IAG) is stored and processed for internal and donor monitoring purposes. We take our responsibilities for protecting your data very seriously. Details of how your personal information is processed, is in accordance with the requirements of the Data Privacy Act of 2012.</p>
       <p style="text-align:justify;">Further, you also consent IAG full rights to use the images resulting from the photography/video filming, and any reproductions, or adaptations of the images for publicity, or other purposes to help achieve the organization’s aims. This might include (but is not limited to), the right to use them in their printed and online publicity, social media, press releases and funding applications.</p>
-      <input type="radio" name="agree" onclick="disable()" style="">&nbsp;<b>I agree</b>
+      <label class="radio-container m-r-55">
+        <input type="radio" name="agree" onclick="disable()" style="">&nbsp;<b>I agree</b>
+        <span class="checkmark"></span>
+      </label>  
     </div>
     <br>
     <button type="submit" name="submit" class="registerbtn" id="myRadio" disabled>Register</button>

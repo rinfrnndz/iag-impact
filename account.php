@@ -9,8 +9,8 @@
 
   $progamadmin = $_SESSION['username'];
 
-    $evaluationsql = "SELECT * FROM `evaluation`";
-    $evaluationACTIVITYID = $_GET['acty_id'];
+    /*$evaluationsql = "SELECT * FROM `evaluation`";
+    $evaluationACTIVITYID = $_GET['acty_id'];*/
 ?>
 
 <!DOCTYPE html>
@@ -115,7 +115,7 @@ a {
       <ul class="nav navbar-nav" >
         <li class="active"><a href="account" >Main</a></li>
         <li><a href="activity" >Add Activity</a></li>
-        <li><a href="evaluation-report">Evaluation Report</a></li>
+        <!--<li><a href="evaluation-report">Evaluation Report</a></li>-->
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="logout.php" onClick="return confirm('Are you sure you want to logout?')"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -126,7 +126,7 @@ a {
 </nav>
 
   <div class="container" style="width: 90%; border: 0px solid grey;">
-    <?php echo "<h2><center>" .$_SESSION['username']. " Report</h1>"; ?></h2>
+    <?php echo "<h2>" .$_SESSION['username']. " Admin</h2>"; ?>
     <hr>
     <h4>Lists of Activities Conducted</h4><br/>
     <table class="table">
@@ -151,19 +151,38 @@ a {
           $this_page_first_result = ($page-1)*$results_per_page;
 
           $no = 1;
-            $program = "SELECT * FROM projectcode projects, activities activity WHERE projects.projects_id=activity.projects_id AND projects.project_code = '$progamadmin' ORDER BY `timestamp` DESC LIMIT $this_page_first_result, $results_per_page ";
-            $progresult = mysqli_query($connect,$program);
+            $program = "SELECT * FROM projectcode projects, activities activity 
+                    WHERE projects.projects_id=activity.projects_id 
+                    AND projects.project_code = '$progamadmin' 
+                    ORDER BY `timestamp` DESC
+                    LIMIT $this_page_first_result, $results_per_page     
+                        "; //
+
+            /*  
+            SELECT *
+                        from projectcode prj_code
+                        inner join activities a on a.projects_id = prj_code.projects_id
+                        inner join participants p on p.act_id = a.id
+                        inner join evaluation e on e.acty_id = p.act_id
+                        where prj_code.project_code = '$progamadmin'
+                        group by a.id            
+                        
+                        */
+            
+            $progresult = mysqli_query($connect, $program);
             $number_of_results = mysqli_num_rows($progresult);
 
             while($progrow=mysqli_fetch_array($progresult)) {
-              //$actvtyID = $progrow['acty_id'];
+       
         ?>
         <tr>
           <td><?php echo $no;?></td>
           <td><?php echo ucfirst($progrow['activity_title']);?></td>
           <td><?php echo $progrow['activity_date'];?></td>
           <td><a href="display?id=<?php echo $progrow['id'];?>" class="btn btn-info">View Participants</a></td>
-          <td><a href="activity-update?id=<?php echo $progrow['id']; ?>" class="btn btn-primary">Update Details</a></td>
+          <!--<td><a href="evaluation-display?id=<?php echo $progrow['acty_id']; ?>" class="btn btn-warning">View Evaluation</a></td>-->
+          <td><a href="activity-update?id=<?php echo $progrow['id']; ?>" class="btn btn-danger">Update Details</a></td>
+          
         </tr>
         <?php
           $no++;
@@ -173,14 +192,31 @@ a {
     </table> <br/>
     <div align= "center">
       <?php
-        $page_query = "SELECT * FROM projectcode projects, activities activity WHERE projects.projects_id=activity.projects_id AND projects.project_code = '$progamadmin' ORDER BY activity.id";
+      
+      /*
+        SELECT * 
+        FROM projectcode projects, activities activity 
+        WHERE projects.projects_id=activity.projects_id 
+        AND projects.project_code = '$progamadmin' ORDER BY activity.id
+
+      */     
+
+        $page_query = "SELECT COUNT(*)
+                        from projectcode prj_code
+                        inner join activities a on a.projects_id = prj_code.projects_id
+                        inner join participants p on p.act_id = a.id
+                        inner join evaluation e on e.acty_id = a.id
+                        where prj_code.project_code = '$progamadmin'
+                        ORDER BY a.id
+                        ";
+
         $page_result = mysqli_query($connect,$page_query);
         $total_records = mysqli_num_rows($page_result);
         $number_of_page = ceil($total_records/$results_per_page);
         
         //starting_limit_number = (page_number-1)*results_per_page;
         for ($page=1;$page<=$number_of_page;$page++){
-          echo '<a style="padding:8px; background:black; border-radius:11px; margin: 0 2px; color:white; font-family: Arial;" href="account?' .$progrow['id']. 'page=' .$page. ' ">'. $page .'</a>';
+          echo '<a style="padding:5px 9px; background:black; border-radius:13px; margin: 0 2px; color:white; font-family: Tahoma;" href="account?' .$progrow['id']. 'page=' .$page. ' ">'. $page .'</a>';
         }
       ?>
     </div>

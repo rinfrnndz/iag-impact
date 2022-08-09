@@ -18,7 +18,8 @@
 
 <style>
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Helvetica, sans-serif;
+  letter-spacing: 0.5px;
   /*background-image: url("iag.jpg");*/
    /*height: 1000px; You must set a specified height */
   background-color: white;
@@ -38,12 +39,12 @@ img {
 
 /* Add padding to containers */
 .container {
-  padding: 50px;
+  padding: 25px;
   background-color: white;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+  width: 75%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 40px 40px -7px;
   background: rgba(255,255,255,1);
   border-radius: 15px;
 }
@@ -213,7 +214,7 @@ th {
 </style>
 </head>
 <body>
-<nav class="navbar navbar-default" style="font-family: calibri; letter-spacing: 1.1px; font-weight: bold;">
+<nav class="navbar navbar-default" style="font-family: Calibri; letter-spacing: 0.6px; font-weight: bold; font-size:15.8px;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
@@ -224,10 +225,9 @@ th {
             </div>
             <div class="collapse navbar-collapse" id="myNavbar" >
             <ul class="nav navbar-nav" >
-                <li><a href="index" style="font-size:16px; font-family: Calibri;">Home</a></li>
-                
-                <li><a href="register" style="font-size:16px; font-family: Calibri;">Registration Form</a></li>
-                <li class="active" style="font-size:16px; font-family: Calibri;"><a href="evaluation-form">Evaluation Form</a></li>
+                <li><a href="index">Home</a></li>
+                <li><a href="registration">Registration Form</a></li>
+                <li class="active"><a href="evaluation-form">Evaluation Form</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="login" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -329,7 +329,7 @@ th {
       
     <br>
     <label for="age"><b>Age Range</b></label>
-      <select name="age_range" id="age_range" >
+      <select name="age_range" id="age_range" required>
         <option disabled="disabled" selected="selected">Select Age Range</option>
         <option>15 - 25</option>
         <option>26 - 35</option>
@@ -340,10 +340,23 @@ th {
       </select>
     
     <label for="gender"><b>Gender</b></label>
-      <select name="sgender" id="sgender" required>
-        <option disabled="disabled" selected="selected">Select Gender</option>
+      <select name="sgender" id="gender" required>
+        <!--<option disabled="disabled" selected="selected">Select Gender</option>
         <option>Male</option>
-        <option>Female</option>
+        <option>Female</option>-->
+        <option disabled="disabled" selected="selected">Select Gender</option>
+        <optgroup label="">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </optgroup>
+        <optgroup label="Others:">
+          <option value="L">L</option>
+          <option value="G">G</option>
+          <option value="B">B</option>
+          <option value="T">T</option>
+          <option value="Q">Q</option>
+          <option value="A">A</option>
+        </optgroup>
       </select>
 
     <label for="ethnic"><b>Ethnicity</b></label>
@@ -380,7 +393,7 @@ th {
         </tr>
         
         <tr>
-            <td style="width:55%;">2. The topics discussed are relevant to the current socio-political realities in the Bangsamoro (ongoing transition, new political framework, etc.)</td>
+            <td style="width:55%;">2. The topics discussed are relevant to the current socio-political realities in the Bangsamoro/CAR (ongoing transition, new political framework, etc.)</td>
             <th><input type="radio" name="ques2" id="ques2" value="1"></th>
             <th><input type="radio" name="ques2" id="ques2" value="2"></th>
             <th><input type="radio" name="ques2" id="ques2" value="3"></th>
@@ -398,7 +411,7 @@ th {
         </tr>
 
         <tr>
-            <td style="width:55%;">4. The activity contributed to enhancing my knowledge and awareness of current social and political developments in the Bangsamoro.</td>
+            <td style="width:55%;">4. The activity contributed to enhancing my knowledge and awareness of current social and political developments in the Bangsamoro/CAR.</td>
             <th><input type="radio" name="ques4" id="ques4" value="1"></th>
             <th><input type="radio" name="ques4" id="ques4" value="2"></th>
             <th><input type="radio" name="ques4" id="ques4" value="3"></th>
@@ -416,7 +429,7 @@ th {
         </tr>
 
         <tr>
-            <td style="width:55%;">6. The activity underscored the important concepts behind the new Bangsamoro government as well as the need for continued political and civic education.</td>
+            <td style="width:55%;">6. The activity underscored the important concepts behind the new Bangsamoro/CAR government as well as the need for continued political and civic education.</td>
             <th><input type="radio" name="ques6" id="ques6" value="1"></th>
             <th><input type="radio" name="ques6" id="ques6" value="2"></th>
             <th><input type="radio" name="ques6" id="ques6" value="3"></th>

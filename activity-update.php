@@ -147,7 +147,7 @@ a {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default" style="font-family: calibri; letter-spacing: 1.1px; font-weight: bold;">
+<nav class="navbar navbar-default" style="font-family: Calibri; letter-spacing: 1.1px; font-weight: bold; font-size:15px">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
@@ -158,9 +158,8 @@ a {
             </div>
             <div class="collapse navbar-collapse" id="myNavbar" >
             <ul class="nav navbar-nav" >
-                <li class="active"><a href="account" style="border-radius: 50%; font-size:22px;">&laquo;</a></li>
-                
-                <li class="disabled"><a href="activity-update">Activity Update</a></li>
+              <li class="active"><a href="account" >❮</a></li>
+              <li class="disabled"><a href="#" class="disabled">Activity Update</a></li>
                 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -210,7 +209,7 @@ a {
     <input type="text" value="<?= $retrieve_row['activity_date'] ?>" name="update_activity_date" id="update_activity_date" required>
     
     <label for="status"><b>Status</b></label><br>
-    <input type="checkbox" name="update_activity_status" <?= $retrieve_row['status'] == '0' ? 'unchecked':'' ?> ><label style="font-weight:normal;">&nbsp;Checked / Unchecked to hide Activity Title from the lists</label>
+    <input type="checkbox" name="update_activity_status" <?= $retrieve_row['status'] == '0' ? 'unchecked':'' ?> ><label style="font-weight:normal;">&nbsp;Check to hide the Activity Title from the lists</label>
     <hr>
     <button type="submit" name="update" class="updatebtn" >Update Title</button>
     <button type="reset" name="reset" class="clearbtn">Cancel</button>

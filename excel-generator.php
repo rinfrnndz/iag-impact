@@ -3,7 +3,7 @@
     session_start();
 
     $program_admin = $_SESSION['username'];
-    //$actvtyID = $_POST['act_id'];
+    $actvty_ID = $_POST['id'];
     //$activitydate = $_POST['activity_date'];
 
     if(isset($_POST['export_in_excel'])) {
@@ -12,27 +12,26 @@
                       INNER JOIN activities ac ON ac.projects_id = pj.projects_id
                       INNER JOIN participants re ON re.act_id = ac.id
                       WHERE pj.project_code='$program_admin'
-                      ORDER BY re.id DESC ";
+                      ORDER BY re.id DESC "; //pj.project_code='$program_admin'
        
         $excel_result = mysqli_query($connect, $excel_sql);
 
         if(mysqli_num_rows($excel_result) > 0) {
             $excel_output .='
-                
-                <table class="excel_table" style="font-family:Helvetica; border:0.9px solid gray;">
-                <tr><td></td></tr>
-                    <tr style="border:0.9px solid gray; width:auto;">
-                        <th style="text-align:center; font-weight:bold;">No.</th>
-                        <th colspan="2" style="text-align:center; font-weight:bold;">Name</th>
-                        <th style="text-align:center; font-weight:bold;">Age</th>
-                        <th style="text-align:center; font-weight:bold;">Gender</th>
-                        <th style="text-align:center; font-weight:bold;">City/Municipality</th>
-                        <th style="text-align:center; font-weight:bold;">Province</th>
-                        <th style="text-align:center; font-weight:bold;">Contact No.</th>
-                        <th style="text-align:center; font-weight:bold;">Email Address</th>
-                        <th style="text-align:center; font-weight:bold;">Organization</th>
-                        <th style="text-align:center; font-weight:bold;">Signature</th>
-                    </tr>
+            <table class="excel_table" style="font-family:Calibri; border:1px solid #1f004d;">
+            <tr><td></td></tr>
+                <tr>
+                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d;">No.</th>
+                    <th colspan="2" style="text-align:center; font-weight:bold; border:1px solid #1f004d;">Name</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Age</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Gender</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">City/Municipality</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Province</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Contact No.</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Email Address</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Organization</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Signature</th>
+                </tr>
             ';
             $no = 1;
             while($excel_row = mysqli_fetch_array($excel_result)) {
