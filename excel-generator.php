@@ -3,7 +3,7 @@
     session_start();
 
     $program_admin = $_SESSION['username'];
-    $actvty_ID = $_POST['id'];
+    $actvty_ID = $_GET['id'];
     //$activitydate = $_POST['activity_date'];
 
     if(isset($_POST['export_in_excel'])) {
@@ -11,8 +11,8 @@
                       FROM projectcode pj
                       INNER JOIN activities ac ON ac.projects_id = pj.projects_id
                       INNER JOIN participants re ON re.act_id = ac.id
-                      WHERE pj.project_code='$program_admin'
-                      ORDER BY re.id DESC "; //pj.project_code='$program_admin'
+                      WHERE pj.project_code='$program_admin' 
+                      ORDER BY re.id DESC "; //pj.project_code='$program_admin' // re.act_id='$actvty_ID' &&
        
         $excel_result = mysqli_query($connect, $excel_sql);
 
@@ -21,8 +21,8 @@
             <table class="excel_table" style="font-family:Calibri; border:1px solid #1f004d;">
             <tr><td></td></tr>
                 <tr>
-                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d;">No.</th>
-                    <th colspan="2" style="text-align:center; font-weight:bold; border:1px solid #1f004d;">Name</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">No.</th>
+                    <th colspan="2" style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Name</th>
                     <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Age</th>
                     <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Gender</th>
                     <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">City/Municipality</th>

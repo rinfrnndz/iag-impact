@@ -151,24 +151,14 @@ a {
           $this_page_first_result = ($page-1)*$results_per_page;
 
           $no = 1;
-            $program = "SELECT * FROM projectcode projects, activities activity 
-                    WHERE projects.projects_id=activity.projects_id 
-                    AND projects.project_code = '$progamadmin' 
-                    ORDER BY `timestamp` DESC
-                    LIMIT $this_page_first_result, $results_per_page     
-                        "; //
-
-            /*  
-            SELECT *
+            $program = " SELECT *
                         from projectcode prj_code
-                        inner join activities a on a.projects_id = prj_code.projects_id
-                        inner join participants p on p.act_id = a.id
-                        inner join evaluation e on e.acty_id = p.act_id
+                        join activities a on a.projects_id = prj_code.projects_id
                         where prj_code.project_code = '$progamadmin'
-                        group by a.id            
-                        
-                        */
-            
+                        group by a.id
+                        ORDER BY a.id
+                        LIMIT $this_page_first_result, $results_per_page"; //
+                      
             $progresult = mysqli_query($connect, $program);
             $number_of_results = mysqli_num_rows($progresult);
 
@@ -180,8 +170,8 @@ a {
           <td><?php echo ucfirst($progrow['activity_title']);?></td>
           <td><?php echo $progrow['activity_date'];?></td>
           <td><a href="display?id=<?php echo $progrow['id'];?>" class="btn btn-info">View Participants</a></td>
-          <!--<td><a href="evaluation-display?id=<?php echo $progrow['acty_id']; ?>" class="btn btn-warning">View Evaluation</a></td>-->
-          <td><a href="activity-update?id=<?php echo $progrow['id']; ?>" class="btn btn-danger">Update Details</a></td>
+          <td><a href="evaluation-display?id=<?php echo $progrow['id']; ?>" class="btn btn-primary">View Evaluation</a></td>
+          <td><a href="activity-update?id=<?php echo $progrow['id']; ?>" class="btn btn-warning">Update Details</a></td>
           
         </tr>
         <?php
@@ -192,23 +182,11 @@ a {
     </table> <br/>
     <div align= "center">
       <?php
-      
-      /*
-        SELECT * 
-        FROM projectcode projects, activities activity 
-        WHERE projects.projects_id=activity.projects_id 
-        AND projects.project_code = '$progamadmin' ORDER BY activity.id
-
-      */     
-
-        $page_query = "SELECT COUNT(*)
-                        from projectcode prj_code
-                        inner join activities a on a.projects_id = prj_code.projects_id
-                        inner join participants p on p.act_id = a.id
-                        inner join evaluation e on e.acty_id = a.id
-                        where prj_code.project_code = '$progamadmin'
-                        ORDER BY a.id
-                        ";
+      $page_query = "SELECT COUNT(*)
+                      from projectcode prj_code
+                      inner join activities a on a.projects_id = prj_code.projects_id
+                      where prj_code.project_code = '$progamadmin'
+                      ORDER BY a.id";
 
         $page_result = mysqli_query($connect,$page_query);
         $total_records = mysqli_num_rows($page_result);
@@ -220,8 +198,6 @@ a {
         }
       ?>
     </div>
-   
-  
   </div><br>
 
 <div class="footer">

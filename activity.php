@@ -4,9 +4,9 @@
   
   $program_admin = $_SESSION['username'];
 
-  $pcode = $_POST['pcodes'];
-  $atitle = $_POST['title'];
-  $adate = $_POST['actdate'];
+  $pcode = mysqli_real_escape_string($connect, $_POST['pcodes']);
+  $atitle = mysqli_real_escape_string($connect, $_POST['title']);
+  $adate = mysqli_real_escape_string($connect, $_POST['actdate']);
 
 ?>
 

@@ -1,11 +1,11 @@
 <?php include 'server.php';
-    
     error_reporting (0);
     session_start ();
 
     if(!isset($_SESSION['username'])) {
         header ("location: login.php");
     }
+
     $progam_admin = $_SESSION['username'];
     $evaluationID = $_GET['id'];
        
@@ -266,7 +266,6 @@ a {
         <tr>
             <th></th>
             <th colspan="2" style="text-align: center;">Name</th>
-            <!-- <th>Date of Birth</th> -->
             <th style="text-align: center;">Age Range</th>
             <th style="text-align: center;">Gender</th>
             <th style="text-align: center;">Ethnicity</th>
@@ -292,18 +291,18 @@ a {
       
     <tbody>
     <?php
-        $results_per_page = 5; //number every page
+        $results_per_page = 10; //number every page
         $page = '';
         if (isset($_GET['page'])) { $page = $_GET['page']; } else { $page = 1; };
-        $this_page_first_result = ($page-1)*$results_per_page;
+          $this_page_first_result = ($page-1)*$results_per_page;
           
         $evaluationsql = "SELECT *
                           FROM projectcode prj
                           INNER JOIN activities act ON  act.projects_id = prj.projects_id
-                          INNER JOIN evaluation e ON act.id = e.acty_id
+                          INNER JOIN evaluation e ON e.acty_id = act.id
                           WHERE prj.project_code = '$progam_admin' AND e.acty_id = '$evaluationID'
-                          ORDER BY e.id DESC "; //LIMIT $this_page_first_result, $results_per_page 
-                    
+                          ORDER BY e.id DESC
+                          LIMIT $this_page_first_result, $results_per_page "; //LIMIT $this_page_first_result, $results_per_page 
         $evaluationresult = mysqli_query($connect, $evaluationsql);
         $number_of_results = mysqli_num_rows($evaluationresult);
 
@@ -315,7 +314,6 @@ a {
           <td data-label=""><?php echo $no;?></td>
           <td data-label=""><?php echo ucfirst($evaluationrow['first_name']);?></td>
           <td ><?php echo ucfirst($evaluationrow['last_name']);?></td>
-          <!-- <td><?php //echo ($evaluationrow['birthday']);?></td> -->
           <td><?php echo ($evaluationrow['age_range']);?></td>
           <td><?php echo ($evaluationrow['gender']);?></td>
           <td><?php echo ucfirst($evaluationrow['ethnicity']);?></td>
@@ -337,20 +335,21 @@ a {
           <td style="text-transform: normal; text-align: left;"><?php echo ($evaluationrow['q14']);?></td>
           <td><?php echo ($evaluationrow['q15']);?></td>
         <?php
-                $no++;
-            }
+            $no++;
+          } echo "<td colspan='23'>No Record Found</td>";
         ?>
         </tr>
     </tbody>
      
   </table>
-  <!--<div align= "center">
+  <div align= "center">
     <?php
        $page_query = "SELECT COUNT(*) 
                       FROM projectcode prj
-                      INNER JOIN activities act ON  act.projects_id = prj.projects_id
-                      INNER JOIN evaluation e ON act.id = e.acty_id
-                      WHERE prj.project_code = '$progam_admin' AND e.acty_id = '$evaluationID' ";
+                      INNER JOIN activities act ON act.projects_id = prj.projects_id
+                      INNER JOIN evaluation e ON e.acty_id = act.id
+                      WHERE e.acty_id = '$evaluationID' && prj.project_code = '$progam_admin'
+                      ORDER BY e.id DESC ";
           
         $page_result = mysqli_query($connect, $page_query);
         $total_records = mysqli_fetch_array($page_result);
@@ -358,10 +357,10 @@ a {
         $number_of_page = ceil($total_of_records/$results_per_page);
          
         for ($page=1; $page<=$number_of_page; $page++){
-           echo '<a style="padding:7px; background:black; color:white; font-family:Helvetica; border:1px solid gray; border-radius:14px;" href="evaluation-display?' .$evaluationID. '&page=' .$page. ' ">' .$page. '</a>';
+           echo '<a style="padding:7px; background:black; color:white; font-family:Helvetica; border:1px solid gray; border-radius:14px;" href="evaluation-display?id=' .$evaluationID. '&page=' .$page. ' ">' .$page. '</a>';
         }
     ?>
-    </div>-->
+    </div>
 </div> <!-- end div for Respondents-->
 
 <div id="Summary" class="tabcontent">

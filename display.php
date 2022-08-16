@@ -205,7 +205,7 @@ a {
       <ul class="nav navbar-nav" >
         <li class="active"><a href="account" >❮</a></li>
         <li><a href="activity" >Add Activity</a></li>
-        <li><a href="evaluation-report" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>
+        <!--<li><a href="evaluation-report" style="font-size:16px; font-family: Calibri;">Evaluation Report</a></li>-->
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="logout.php" onClick="return confirm('Are you sure you want to logout?')" style="font-size:16px; font-family: Calibri;"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -307,7 +307,7 @@ a {
     </tbody>
     <?php
         $no ++;
-      }
+      } 
     ?>
   </table><br/>
   
