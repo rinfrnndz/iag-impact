@@ -3,16 +3,16 @@
     session_start();
 
     $program_admin = $_SESSION['username'];
-    $actvty_ID = $_GET['id'];
+    //$activity_ID = $_SESSION['id'];
     //$activitydate = $_POST['activity_date'];
 
     if(isset($_POST['export_in_excel'])) {
         $excel_sql = "SELECT *
                       FROM projectcode pj
-                      INNER JOIN activities ac ON ac.projects_id = pj.projects_id
-                      INNER JOIN participants re ON re.act_id = ac.id
-                      WHERE pj.project_code='$program_admin' 
-                      ORDER BY re.id DESC "; //pj.project_code='$program_admin' // re.act_id='$actvty_ID' &&
+                      JOIN activities ac ON ac.projects_id = pj.projects_id
+                      JOIN participants re ON re.act_id = ac.id
+                      WHERE pj.project_code='$program_admin'
+                      ORDER BY re.id DESC "; //re.act_id = '$actvty_ID'
        
         $excel_result = mysqli_query($connect, $excel_sql);
 
@@ -21,16 +21,16 @@
             <table class="excel_table" style="font-family:Calibri; border:1px solid #1f004d;">
             <tr><td></td></tr>
                 <tr>
-                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">No.</th>
-                    <th colspan="2" style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Name</th>
-                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Age</th>
-                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Gender</th>
-                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">City/Municipality</th>
-                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Province</th>
-                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Contact No.</th>
-                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Email Address</th>
-                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Organization</th>
-                    <th style="text-align:center; font-weight:bold; border:1px solid #1f004d; ">Signature</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid black; ">No.</th>
+                    <th colspan="2" style="text-align:center; font-weight:bold; border:1px solid black; ">Name</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid black; ">Age</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid black; ">Gender</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid black; ">City/Municipality</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid black; ">Province</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid black; ">Contact No.</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid black; ">Email Address</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid black; ">Organization</th>
+                    <th style="text-align:center; font-weight:bold; border:1px solid black; ">Signature</th>
                 </tr>
             ';
             $no = 1;

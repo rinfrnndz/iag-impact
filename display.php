@@ -178,6 +178,9 @@ a {
   background: white;
 }
 
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
 </style>
 <script type="text/javasript" src="jquery-3.6.0.js"></script>
     <meta charset="utf-8">
@@ -220,14 +223,7 @@ a {
     <h3><center>Participants' Information</center></h3>
   <hr>
 
-  <form action="" method="GET">
-    <div style="background-color:black; width:50%; padding:10px;">
-      <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>" class="form-control" placeholder="Search data" style="width:100%; padding:10px;">
-      <button type="submit" class="btn btn-primary">Search</button>
-    </div>
-  </form>
 
-<hr>
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'Participants')" id="defaultOpen">Participants</button>
   <button class="tablinks" onclick="openCity(event, 'Summary')">Summary</button>
@@ -236,6 +232,7 @@ a {
 
 <div id="Participants" class="tabcontent">
   <h3>Participants</h3>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
   <div style="padding:10px; margin-left: 85%; border: 1px solid black; margin-top:-55px;">
     <form action="excel-generator" method="POST" >
       <input type="submit" name="export_in_excel" class="btn btn-warning active" style="display:inline; padding:10px;" value="Export as Excel file">
@@ -244,7 +241,7 @@ a {
 
   <table class="r">
     <thead>
-      <tr>
+      <tr >
         <th scope="row" style="text-align:center;">#</th>
         <th scope="row" colspan="2" style="text-align:center;">Full Name</th>
         <!--<th scope="row" style="text-align:center;">Date of Birth</th>-->
@@ -262,7 +259,7 @@ a {
         <th scope="row" style="text-align:center;">Organization's Email</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="myTable">
       <?php
         $results_per_page = 10; //number every page
         $page = '';
@@ -285,7 +282,7 @@ a {
           $no = 1;
           while ($participants = mysqli_fetch_assoc($qrytoshowparticipants)) {
       ?>
-      <tr>
+      <tr class="header" >
         <td><?php echo $no;?></td>
         <td><?php echo ucfirst($participants['firstname']);?></td>
         <td><?php echo ucfirst($participants['lastname']);?></td>
@@ -310,7 +307,26 @@ a {
       } 
     ?>
   </table><br/>
-  
+  <script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+  </script>
   <div align= "center" >
     <?php
       $page_query = "SELECT COUNT(*) FROM projectcode pr
@@ -329,6 +345,7 @@ a {
       }
     ?>
   </div>
+  
 </div> <!-- end div for Participants-->
 
 <div id="Summary" class="tabcontent">

@@ -92,13 +92,13 @@ a {
   font-size: 13px;
 }
 </style>
-  <script type="text/javasript" src="jquery-3.6.0.js"></script>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shorcut icon" type="image/png" href="favicon-32x32.png">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <meta name="description" >  
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">   
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+  <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default" style="font-family: Calibri; letter-spacing: 1.1px; font-weight: bold; font-size:15px;">
@@ -129,35 +129,25 @@ a {
     <?php echo "<h2>" .$_SESSION['username']. " Admin</h2>"; ?>
     <hr>
     <h4>Lists of Activities Conducted</h4><br/>
-    <table class="table">
+    <table id="myTable" class="table " >
     <thead>
       <tr>
           <!--<th>Project Code</th>-->
           <th style="text-align: center;">#</th>
           <th style="text-align: center;">Activity</th>
           <th style="text-align: center;">Date</th>
-          <th colspan="2" style="text-align: center;">Option/s</th>
+          <th colspan="3" style="text-align: center;">Option/s</th>
       </tr>
     </thead>
         <?php
-
-          $results_per_page = 10; //number every page
-          $page = '';
-          if (!isset($_GET['page'])) {
-            $page = 1;
-          } else {
-            $page = $_GET['page'];
-          }
-          $this_page_first_result = ($page-1)*$results_per_page;
-
           $no = 1;
-            $program = " SELECT *
+            $program = "SELECT *
                         from projectcode prj_code
                         join activities a on a.projects_id = prj_code.projects_id
                         where prj_code.project_code = '$progamadmin'
                         group by a.id
                         ORDER BY a.id
-                        LIMIT $this_page_first_result, $results_per_page"; //
+                        "; //LIMIT $this_page_first_result, $results_per_page
                       
             $progresult = mysqli_query($connect, $program);
             $number_of_results = mysqli_num_rows($progresult);
@@ -165,6 +155,7 @@ a {
             while($progrow=mysqli_fetch_array($progresult)) {
        
         ?>
+      <tbody> 
         <tr>
           <td><?php echo $no;?></td>
           <td><?php echo ucfirst($progrow['activity_title']);?></td>
@@ -177,27 +168,14 @@ a {
         <?php
           $no++;
           }
-          
         ?>
+      </tbody>
     </table> <br/>
-    <div align= "center">
-      <?php
-      $page_query = "SELECT COUNT(*)
-                      from projectcode prj_code
-                      inner join activities a on a.projects_id = prj_code.projects_id
-                      where prj_code.project_code = '$progamadmin'
-                      ORDER BY a.id";
-
-        $page_result = mysqli_query($connect,$page_query);
-        $total_records = mysqli_num_rows($page_result);
-        $number_of_page = ceil($total_records/$results_per_page);
-        
-        //starting_limit_number = (page_number-1)*results_per_page;
-        for ($page=1;$page<=$number_of_page;$page++){
-          echo '<a style="padding:5px 9px; background:black; border-radius:13px; margin: 0 2px; color:white; font-family: Tahoma;" href="account?' .$progrow['id']. 'page=' .$page. ' ">'. $page .'</a>';
-        }
-      ?>
-    </div>
+    <script>
+      $(document).ready(function(){
+          $('#myTable').dataTable();
+      });
+    </script>
   </div><br>
 
 <div class="footer">
@@ -206,5 +184,6 @@ a {
     Notre Dame University, Notre Dame Avenue, Cotabato City<br/>
   </label>
 </div>
+
 </body>
 </html>
